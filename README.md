@@ -1,1 +1,1 @@
-# easyspacy
+# Easyspacy
