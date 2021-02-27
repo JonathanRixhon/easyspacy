@@ -39,7 +39,6 @@ Ce qui sous entend une interface type _"straight to the point"_, pas mal d'assis
 - Sobre et clair,
 - Rester simple,
 - Capsules sur la page d'accueil,
--
 
 ## Fonctions supplémentaires
 
