@@ -38,6 +38,7 @@ Ce qui sous entend une interface type _"straight to the point"_, pas mal d'assis
 - Interface type _"straight to the point"_,
 - Sobre et clair,
 - Rester simple,
+- Capsules sur la page d'accueil,
 -
 
 ## Fonctions supplémentaires
@@ -66,3 +67,9 @@ ils utilisent open sans mais c'est pas obligé de la garder.
 - Faire un bouton "copier le lien"
 - Faire un toolkit pour la presse (charte graphique pour la presse).
 - On peut atterir de n'importe où donc faire gaffe.
+- Se renseigner sur des sites pour le presse toolkit
+- landing page : avatars et présentation bréve, ensuite capsules par ordre de sortie,
+- Partie news excules de la recherche,
+- Avoir une adresse mail avec le nom de domaine,
+- Texte continu pour toures les slides; lecture rapide,
+- objectifs des journalistes: partager une capsule facilement; accès aux guidelines de publication.
