@@ -30,7 +30,7 @@ Ce qui sous entend une interface type _"straight to the point"_, pas mal d'assis
 - Pas cliché,
 - Pages:
   - Accueil,
-  - News,
+  - News au format blog,
   - Contact.
 - Bannière accrocheuse,
 - Voir les posts au premier regard,
@@ -56,7 +56,7 @@ ils utilisent open sans mais c'est pas obligé de la garder.
 - Différentiation des thèmes, soit aérospacial, soit astophyisque.
 - Contenu par page dédiées.
 - Faire une page qui revoit sur le post Instagram, ça crée du trafic.
-- Le site est une version plsu compète d'intagram.
+- Le site est une version plus compète d'intagram.
 - faire des fonctions _trier par_ (popularité).
 - Partie qui permet à la presse de faire des liens.
 - Viser les journalistes (dans le footer)
