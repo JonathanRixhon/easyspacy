@@ -26,12 +26,18 @@ Section présentation:
 
 - Image des avatars,
 - présentation brève,
+- lien pour rejoindre Easyspacy sur Instagram,
+- Dernière publication,
+  _- Vignette décrite dans la section suivante_.
 
 Section capsules:
 
+- Fonction trier par (date, popularité,...)
 - Image représentative de la capsule (même que sur insta),
 - Titre,
 - description bréve,
+- temps de l'ecture estimé,
+- tags concernant le sujet (_voir la description_)
 - bouton visualiser.
 
 ## News
@@ -72,11 +78,14 @@ Apprendre des choses aux utilisateurs et permettre à la presse de partager cet 
 ### Contenu
 
 - Titre,
+- Barre d'avancement dans l'article et temps de lecture restant,
 - Images,
 - contenu textuel de la capsule,
-- Lien qui renvoit à la capsule d'Instagram.
+- Lien qui renvoit à la capsule d'Instagram,
 - Bouton copier le lien,
-- Boutons pour partager sur les réseaux.
+- Boutons pour partager sur les réseaux,
+- découvrir d'autres publications passionnantes:
+  - Liste de vignette comme décrite plus haut.
 
 ## Page dédiée news
 
