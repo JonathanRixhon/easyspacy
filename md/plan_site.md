@@ -80,6 +80,9 @@ Apprendre des choses aux utilisateurs et permettre à la presse de partager cet 
 ### Contenu
 
 - Titre,
+- Boutnon j'aime,
+- bouton de partage rapide sur facebook,
+- bouton de partage rapide sur twitter,
 - Barre d'avancement dans l'article et temps de lecture restant,
 - Images,
 - contenu textuel de la capsule,

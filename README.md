@@ -70,12 +70,22 @@ Le formulaire de contact sera assez sobre, un titre sera dispobile par champs de
 
 ### Page dédiée capsule
 
+Section contenu :
+
 La page capsule dédiée sera vraiment optimisée pour la lecture. le bouton "copier le lien" sera disposé à droite de la page suivit du bouton "visionner sur instagram". U survol, il se mettra en évidence, une fois cliqué, l'arrière plan du bouton s'éclaircira et un texte de remplacement viendra confirmé que le lien est bien copié. Après un certain temps, il retrouvera son scpect d'origine pour que l'utilisateur puisse à nouveau cliquer dessus.
 
 Le contenu pourra être mis en page par l'utilisateur, un gabarit de base sera toutefois proposé.
 
 Après analyse du contenu que Easyspacy porpose il a été décidé qu'il était préferable de scinder les images avec le contenu qui lui correspond. Cette déscision a été prise en raison des shémas expliquatifs qu'Easyspacy propose, il sera plus facile d'expliquer les shémas avec le texte associé a côté. Il sera aussi possible de ne pas regrouper les images et le texte, certaines publications comportent peu d'images et beaucoup de texte. la priorité sera mise sur le texte bien qu'il sera ponctué d'image s'il y en a.
 
+Les boutons "j'aime", "copier le lien", "partage rapide sur facebook" et "partage rapide sur twitter" seront rappelés à la fin de l'article.
+
+Section article similaires:
+
+la partie artcile située en dessous est encore a détermminer, ce sera une partie "article similaires" qui sera créée en fonction des tags par article que Easyspacy aura déterminé.
+
+Cette liste sera horizontale et affichera un certain nombre d'article, une flèche sur le côté permettra de d'afficher cette même quantité. En bref, c'est un carrousel.
+
 ### Page dédiée news
 
-_En cours_
+La page news dédiée sera relativement simple, le titre de la nouvelle sera à gauche un bouton j'aime se siturera sur le coin supérieur droit de l'article. Des photos pourront y être ajoutées pour ponctuer le texte. Un bouton pour copier le lien de l'article et un rappel du bonton j'aime seront présents.
