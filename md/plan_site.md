@@ -38,7 +38,8 @@ Section capsules:
 - description bréve,
 - temps de l'ecture estimé,
 - tags concernant le sujet (_voir la description_)
-- bouton visualiser.
+- bouton visualiser,
+- Difficulté.
 
 ## News
 
@@ -52,7 +53,8 @@ Liste de news avec:
 
 - Un titre,
 - une date,
-- une description brève.
+- une description brève,
+- Un bouton visionner l'article.
 
 ## Contact
 

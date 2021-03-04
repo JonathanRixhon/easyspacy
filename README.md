@@ -43,6 +43,13 @@ Pied de page:
 
 Le pied de page sera un peu plus foncé que le reste pour bien marquer la section et donc, la fin du site. Une liste de lien sera disponible. Leur opacité augmentera au survol pour monter que l'élément est cliquable. Un lien vers le compte Instagram et l'icône de l'application y seront présent et bien évidemment, un "toolkit" sera mis à disposition pour la presse afin qu'elle puisse respecter l'univers graphique mis en place.
 
+Les boutons:
+
+Les bordures des boutons seront arrondies pour lui donner un aspect plus "gentil". Un petite icône sera à l'intérieur de celui-ci ainsi qu'un texte précisant l'action. Ils seront tous annimés au survol ainsi qu'un clique pour que l'utilisateur ait du feedback à chaque action il sera donc toujours prévenu de l'action éventuelle qu'il peut faire ou qu'il a faite.
+
+La scrollbar:
+La scrollbar sera modifiée pour lui donner un look plus moderne. Il va de soi qu'elle sera toujours reconnaissable et clairement indiquée. Cela permetra d'unifier la scrollbar avec le reste du site.
+
 ### Accueil
 
 Section présentation:
@@ -55,7 +62,7 @@ La section des publications est une liste d'élément mise sous fome de tableau,
 
 ### News
 
-cette page se présentera de manière simple. Une liste d'article sur lequel une vignette "Nouveau" pourra être retirée à partir d'un temps écoulé ou bien si un administrateur le souhaite. Un titre sera présent et un commentaire de la part d'Easyspacy pourra être écrit. Un petit bouton "j'aime" sera disponible et lorsqu'on cliquera dessus, une petite animation sera faite. La date sera aussi disponible.
+cette page se présentera de manière simple. Une liste d'article sur lequel une vignette "Nouveau" pourra être retirée à partir d'un laps de temps écoulé ou bien si un administrateur le souhaite. Un titre sera présent et un commentaire de la part d'Easyspacy pourra être écrit. Un petit bouton "j'aime" sera disponible et lorsqu'on cliquera dessus, une petite animation sera faite. La date sera aussi disponible.
 
 ### Contact
 
@@ -63,7 +70,11 @@ Le formulaire de contact sera assez sobre, un titre sera dispobile par champs de
 
 ### Page dédiée capsule
 
-_En cours_
+La page capsule dédiée sera vraiment optimisée pour la lecture. le bouton "copier le lien" sera disposé à droite de la page suivit du bouton "visionner sur instagram". U survol, il se mettra en évidence, une fois cliqué, l'arrière plan du bouton s'éclaircira et un texte de remplacement viendra confirmé que le lien est bien copié. Après un certain temps, il retrouvera son scpect d'origine pour que l'utilisateur puisse à nouveau cliquer dessus.
+
+Le contenu pourra être mis en page par l'utilisateur, un gabarit de base sera toutefois proposé.
+
+Après analyse du contenu que Easyspacy porpose il a été décidé qu'il était préferable de scinder les images avec le contenu qui lui correspond. Cette déscision a été prise en raison des shémas expliquatifs qu'Easyspacy propose, il sera plus facile d'expliquer les shémas avec le texte associé a côté. Il sera aussi possible de ne pas regrouper les images et le texte, certaines publications comportent peu d'images et beaucoup de texte. la priorité sera mise sur le texte bien qu'il sera ponctué d'image s'il y en a.
 
 ### Page dédiée news
 
