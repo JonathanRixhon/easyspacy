@@ -121,11 +121,12 @@ Apprendre des choses aux utilisateurs et permettre à la presse de partager cet 
   - Liste de vignette comme décrite plus haut.
 
 Section commentaire
+
 - Un bouton commenter qui fera apparaître un formulaire pour commenter:
   - Nom de la personne,
   - contenu textuel du commentaire
 - Une liste des commentaire avec:
-  - Le nom de la personne et son commentaire.      
+  - Le nom de la personne et son commentaire.
 
 ### Page dédiée news
 
