@@ -1,3 +1,17 @@
-*.docx
-.DS_Store
-img/
+
+/*
+##Github
+!.gitignore
+!README.md
+#
+##WP-theme
+#!/wp-content
+#/wp-content/*
+#!/wp-content/theme
+#/wp-content/theme/*
+#!/wp-content/easyspacy
+#
+##designs
+#!/design
+#!/wireframe
+# !/md
