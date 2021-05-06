@@ -1,17 +1,13 @@
-
 /*
-##Github
+
+!/wp-content
+/wp-content/*
+!/wp-content/themes
+/wp-content/themes/*
+!/wp-content/themes/test
+/wp-content/themes/test/public/*
+
 !.gitignore
 !README.md
-#
-##WP-theme
-#!/wp-content
-#/wp-content/*
-#!/wp-content/theme
-#/wp-content/theme/*
-#!/wp-content/easyspacy
-#
-##designs
-#!/design
-#!/wireframe
-# !/md
+!package.json
+!webpack.mix.js
