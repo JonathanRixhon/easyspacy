@@ -1,5 +1,6 @@
 /*
 *.DS_Store
+
 #Thème
 !/wp-content
 /wp-content/*
@@ -19,3 +20,7 @@
 !package.json
 !webpack.mix.js
 
+
+# Webpack
+!package.json
+#/wp-content/theme/easyspacy/public/*

@@ -1,0 +1,29 @@
+body {
+  background-color: #f6f5f5;
+}
+h1,
+h2,
+h3 {
+  color: #1a4a51;
+}
+
+.sro {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+.capsule {
+  width: 30%;
+  background-color: #fbfbfe;
+  border-radius: 20px;
+  box-shadow: 1px 2px 15px rgba(0, 0, 0, 0.05);
+  padding: 1em;
+}
+.intro {
+  background-color: #cfdde8;
+}
