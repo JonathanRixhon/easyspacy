@@ -5,10 +5,13 @@
     <nav>
         <h3>Pages</h2>
             <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Actualités</a></li>
-                <li><a href="#">À propos</a></li>
-                <li><a href="#">Contact</a></li>
+                <?php foreach (es_menu('footer') as $link) : ?>
+                    <li>
+                        <a href="<?= $link->url; ?>" class="menu__link">
+                            <?= $link->label; ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
     </nav>
     <section>

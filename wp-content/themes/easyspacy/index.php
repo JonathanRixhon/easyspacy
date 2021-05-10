@@ -8,26 +8,45 @@
                     <?php the_content() ?>
                     <a href="#">à propos</a>
                 </section>
-            <?php endwhile;
-        else : ?>
-            <p>Il n'y a pas encore de capsules à ce jour.</p>
-        <?php endif; ?>
-        <section>
-            <h3>Dernière capsule</h3>
-            <article class="capsule">
-                <h4>Titre de la capsule</h4>
-                <img src="" alt="description de la capsule">
-                <dl>
-                    <dt>Date</dt>
-                    <dd>une date</dd>
-                    <dt>Difficulté</dt>
-                    <dd>🌕🌕🌑</dd>
-                    <dt>Durée</dt>
-                    <dd>6 minutes</dd>
-                </dl>
-                <a href="#" class="sro">Visualier</a>
-            </article>
-        </section>
+            <?php endwhile; ?>
+            <section>
+                <h3>Dernière capsule</h3>
+                <!-- afficher la dernière capsule -->
+                <?php
+                $capsules = new WP_Query([
+                    'post_type' => 'capsule',
+                    'posts_per_page' => 1,
+                    'orderby' => 'date',
+                    'order' => 'desc'
+                ]);
+                ?>
+                <?php if ($capsules->have_posts()) : while ($capsules->have_posts()) : $capsules->the_post(); ?>
+                        <article class="capsule">
+                            <h4><?php the_title() ?></h4>
+                            <dl>
+                                <dt>Date</dt>
+                                <dd>date</dd>
+                                <dt>Difficulté</dt>
+                                <dd><?= es_difficulty_moon(get_field('difficulty')); ?></dd>
+                                <dt>Durée</dt>
+                                <dd>6 minutes</dd>
+                            </dl>
+                            <a class="capsule__link" href="<?php the_permalink(); ?>">
+                                <span class="sro">
+                                    Visualiser la capsule sur <?php the_title() ?>
+                                </span>
+                            </a>
+                            <p aria-hidden="true">Visualiser la capsule</p>
+                            <figure class="capsule_fig">
+                                <img <?= es_the_thumbnail_attributes(['capsule-thumbnail-regular']); ?>>
+                            </figure>
+                        </article>
+                    <?php endwhile; ?>
+                <?php else : ?>
+                    <p>Il n'y a pas encore de capsules 🚀</p>
+                <?php endif; ?>
+                <!-- Fin de la dernière capsule -->
+            </section>
     </section>
     <section>
         <h2>Capsules</h2>
@@ -36,20 +55,43 @@
             <option value="popularite">Trier par: popularité</option>
         </select>
         <!-- Capsule -->
-        <article class="capsule">
-            <h3>Titre de la capsule</h3>
-            <img src="" alt="description de la capsule">
-            <dl>
-                <dt>Date</dt>
-                <dd>une date</dd>
-                <dt>Difficulté</dt>
-                <dd>🌕🌕🌑</dd>
-                <dt>Durée</dt>
-                <dd>6 minutes</dd>
-            </dl>
-            <a href="#" class="sro">Visualier</a>
-        </article>
-        <!-- Capsule -->
+        <!-- Boucler sur les capsules -->
+        <?php
+            $capsules = new WP_Query([
+                'post_type' => 'capsule',
+                'posts_per_page' => 10,
+                'orderby' => 'date',
+                'order' => 'desc'
+            ]);
+        ?>
+        <?php if ($capsules->have_posts()) : while ($capsules->have_posts()) : $capsules->the_post(); ?>
+                <article class="capsule">
+                    <h3><?php the_title() ?></h3>
+                    <img src="" alt="description de la capsule">
+                    <dl>
+                        <dt>Date</dt>
+                        <dd>date</dd>
+                        <dt>Difficulté</dt>
+                        <dd><?= es_difficulty_moon(get_field('difficulty')); ?></dd>
+                        <dt>Durée</dt>
+                        <dd>6 minutes</dd>
+                    </dl>
+                    <a class="capsule__link" href="<?php the_permalink(); ?>">
+                        <span class="sro">
+                            Visualiser la capsule sur <?php the_title() ?>
+                        </span>
+                    </a>
+
+                    <p aria-hidden="true">Visualiser la capsule</p>
+                </article>
+            <?php endwhile; ?>
+        <?php else : ?>
+            <p>Il n'y a pas encore de capsules 🚀</p>
+        <?php endif; ?>
+        <!-- Fin de la boucle des capsules -->
     </section>
+<?php else : ?>
+    <p>Cette page est vide!</p>
+<?php endif; ?>
 </main>
 <?php get_footer(); ?>
