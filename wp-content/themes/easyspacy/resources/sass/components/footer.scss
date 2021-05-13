@@ -1,0 +1,50 @@
+.bottom {
+  font-size: $size-regular;
+  background-color: $white;
+  color: $dark-blue;
+  line-height: $all-line-height;
+  display: flex;
+  justify-content: space-around;
+  align-items: top;
+  padding: 1.33333333em 0 1.33333333em 0;
+  &__logo {
+    display: block;
+  }
+  .secondary-navigation {
+    &__title {
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+    &__list {
+      display: flex;
+    }
+    &__item {
+      margin-right: 1em;
+    }
+    &__link {
+      @include no-style-link;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+  .social-navigation {
+    &__title {
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+    &__list {
+      margin-bottom: 0.25em;
+    }
+    &__item {
+      margin-right: 1em;
+    }
+    &__link {
+      @include no-style-link;
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+.top {
+  color: $dark-blue;
+  background-color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em 0;
+  font-size: $size-regular;
+  &__logo {
+    display: block;
+  }
+  .main-navigation {
+    width: 68.75%;
+    &__list {
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+    }
+    &__link {
+      @include no-style-link;
+      &_current {
+        font-weight: bold;
+      }
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+  //Style du formulaire de recherche
+  .search-form {
+    position: relative;
+    &__search-input {
+      color: transparent;
+      max-width: 56px;
+      line-height: 52px;
+      border-radius: 100vh;
+      border: 2px solid $dark-blue;
+      background-color: transparent;
+      transition: all 0.25s;
+      &:focus {
+        @include search-open;
+      }
+    }
+    &__submit {
+      z-index: 1;
+      text-indent: -9999px;
+      text-align: left;
+      position: absolute;
+      right: 0;
+      left: 0;
+      max-width: 56px;
+      line-height: 3.11111111em;
+      border-radius: 100vh;
+      background: no-repeat center url() transparent;
+    }
+    &:hover {
+      .search-form__search-input {
+        @include search-open;
+      }
+    }
+    .focused {
+      @include search-open;
+    }
+  }
+}

@@ -7,7 +7,7 @@
 !/wp-content/themes
 /wp-content/themes/*
 !/wp-content/themes/easyspacy
-/wp-content/themes/easyspacy/public/*
+!/wp-content/themes/easyspacy/public/*
 
 #Designs
 !/design

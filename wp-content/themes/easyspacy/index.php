@@ -38,7 +38,7 @@
                             </a>
                             <p aria-hidden="true">Visualiser la capsule</p>
                             <figure class="capsule_fig">
-                                <img <?= es_the_thumbnail_attributes(['capsule-thumbnail-regular']); ?>>
+                                <img <?= es_the_thumbnail_attributes(['capsule-thumbnail-regular', 'thumbnail']); ?>>
                             </figure>
                         </article>
                     <?php endwhile; ?>

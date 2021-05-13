@@ -22,7 +22,11 @@ mix
     'wp-content/themes/easyspacy/resources/sass/theme.scss',
     'wp-content/themes/easyspacy/public/css'
   )
-  .browserSync({
+  .copy(
+    'wp-content/themes/easyspacy/resources/img',
+    'wp-content/themes/easyspacy/public/img'
+  )
+/* .browserSync({
     proxy: 'project.localhost',
     notify: false,
-  })
+  }) */

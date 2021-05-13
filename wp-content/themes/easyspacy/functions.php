@@ -137,7 +137,7 @@ function es_the_thumbnail_attributes($sizes = [])
 function es_bem($base, $modifiers = [])
 {
     $classes = array_map(function ($modifier) use ($base) {
-        return $base . '--' . $modifier;
+        return $base . '_' . $modifier;
     }, $modifiers);
     return implode(' ', $classes);
 }
@@ -153,7 +153,6 @@ function es_asset($path)
 /* *****
  * Disable the Wordpress Gutenberg Editor
  * *****/
-
 add_filter("use_block_editor_for_post_type", "disable_gutenberg_editor");
 
 function disable_gutenberg_editor()
@@ -162,12 +161,24 @@ function disable_gutenberg_editor()
 }
 
 /* *****
+* Delete intermediate img sizes
+* *****/
+add_filter('intermediate_image_sizes', function ($sizes) {
+    return array_filter($sizes, function ($val) {
+        return 'medium_large' !== $val; // Filter out 'medium_large'
+    });
+});
+/* *****
 * Add custom img sizes
 * *****/
 add_action('after_setup_theme', 'es_image_sizes');
 function es_image_sizes()
 {
+    //capsules thumbnail
+    add_image_size('capsule-thumbnail-small', 236, 236, true);
     add_image_size('capsule-thumbnail-regular', 328, 328, true);
+    //capsule content
+    add_image_size('capsule-thumbnail-regular', 430, 430, true);
 }
 /* *****
 * Enable thumbnails support
