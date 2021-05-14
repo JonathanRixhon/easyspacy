@@ -19,7 +19,9 @@
 <body>
     <header class="top">
         <h1 class="top__title sro"><?= is_front_page() ? bloginfo('description') : bloginfo('description') . wp_title(":", false); ?></h1>
-        <a href=""><img class="top__logo" src="<?= es_asset("img/logo56x56.png") ?>" srcset="<?= es_asset("img/logo56x56.png") ?> 1x,<?= es_asset("img/logo112x112.png") ?> 2x " alt="Logo de Easyspacy"></a>
+        <a href="<?= get_home_url() ?>">
+            <img class="top__logo" src="<?= es_asset("img/logo56x56.png") ?>" srcset="<?= es_asset("img/logo56x56.png") ?> 1x,<?= es_asset("img/logo112x112.png") ?> 2x " alt="Logo de Easyspacy">
+        </a>
         <nav class="main-navigation">
             <h2 class="sro">Navigation principale</h2>
             <ul class="main-navigation__list">
@@ -35,7 +37,7 @@
         <?php /* formulaire */ ?>
         <form action="search-page.php" method="get" class="search-form">
             <label for="search" class="search-form__label sro">Rechercher</label>
-            <input type="text" name="search" id="search" class="search-form__search-input" spellcheck="false">
+            <input type="text" name="search" id="search" class="search-form__search-input" autocomplete="off" spellcheck="false">
             <button type="submit" class="search-form__submit">Rechercher</button>
         </form>
         <?php /* formulaire */ ?>

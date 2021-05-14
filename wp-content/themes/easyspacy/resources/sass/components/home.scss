@@ -1,0 +1,16 @@
+.main-home {
+  background-color: $dark-white;
+  margin: 0 auto;
+  overflow: hidden;
+  .presentation {
+    background-color: $light-blue;
+  }
+  .capsule {
+    padding: 1.11111111em;
+    background-color: $white;
+    margin: 0 auto;
+    &__title {
+      font-size: $size-title-capsule;
+    }
+  }
+}

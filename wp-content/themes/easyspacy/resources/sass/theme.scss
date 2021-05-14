@@ -5,9 +5,4 @@
 @import 'utils.scss';
 @import 'components/header.scss';
 @import 'components/footer.scss';
-
-main {
-  margin: 0 auto;
-  max-width: 1144px;
-  overflow: hidden;
-}
+@import 'components/home.scss';

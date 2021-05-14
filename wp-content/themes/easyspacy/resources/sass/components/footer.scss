@@ -11,40 +11,18 @@
     display: block;
   }
   .secondary-navigation {
-    &__title {
-      margin-bottom: 0.5em;
-      font-weight: bold;
-    }
+    @include link-bottom();
     &__list {
       display: flex;
     }
     &__item {
       margin-right: 1em;
     }
-    &__link {
-      @include no-style-link;
-      &:hover {
-        font-weight: bold;
-      }
-    }
   }
   .social-navigation {
-    &__title {
-      margin-bottom: 0.5em;
-      font-weight: bold;
-    }
+    @include link-bottom();
     &__list {
       margin-bottom: 0.25em;
-    }
-    &__item {
-      margin-right: 1em;
-    }
-    &__link {
-      @include no-style-link;
-
-      &:hover {
-        font-weight: bold;
-      }
     }
   }
 }

@@ -82,6 +82,21 @@ function es_custom_post_type()
         'menu_icon' => 'dashicons-welcome-widgets-menus',
         'supports' => ['title', 'editor', 'thumbnail'],
     ]);
+    //texte de bienvenue
+    register_post_type('welcome', [
+        'label' => 'Messages de Bienvenue',
+        'labels' => [
+            'singular_name' => 'Message de bienvenue',
+            'add_new_item' => 'Ajouter une message',
+            'add_new' => 'Ajouter une message',
+        ],
+        'rewrite' => [],
+        'description' => 'Ensemble des messages de bienvnue disposés sur la page d’accueil.',
+        'public' => true,
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-format-chat',
+        'supports' => ['title', 'editor', 'page-attributes'],
+    ]);
 }
 
 /* *****
@@ -104,7 +119,7 @@ function es_difficulty_moon($difficulty)
 * Return thumbnail attributes
 * *****/
 
-function es_the_thumbnail_attributes($sizes = [])
+function es_the_thumbnail_attributes_width($sizes = [])
 {
     // 1. Récupérer le thumbnail pour le post courant dans the loop
     $thumbnail = get_post(get_post_thumbnail_id());
@@ -129,6 +144,73 @@ function es_the_thumbnail_attributes($sizes = [])
     // 5. Retourner les attributs générés
     return 'src="' . $src . '" srcset="' . $srcset . '" alt="' . $alt . '"';
 }
+function es_the_thumbnail_attributes_density($sizes = [])
+{
+    // 1. Récupérer le thumbnail pour le post courant dans the loop
+    $thumbnail = get_post(get_post_thumbnail_id());
+    $thumbnail_meta = get_post_meta($thumbnail->ID);
+
+    $src = null;
+    $density = 0;
+
+
+
+    // 2. Récupérer les tailles d'image qui nous intéressent & formater les tailles pour qu'elles soient utilisables dans srcset
+    $sizes = array_map(function ($size) use ($thumbnail, &$src, &$density) {
+        $data = wp_get_attachment_image_src($thumbnail->ID, $size);
+        if (is_null($src)) {
+            $src = $data[0];
+        }
+        $density++;
+        return $data[0] . " " . $density . "x";
+    }, $sizes);
+
+    // 4. Formater les attributs
+    $srcset = implode(', ', $sizes);
+    $alt = $thumbnail_meta['_wp_attachment_image_alt'][0] ?? null;
+
+    // 5. Retourner les attributs générés
+    return 'src="' . $src . '" srcset="' . $srcset . '" alt="' . $alt . '"';
+}
+function es_the_content_attributes_density($imageName, $sizes = [])
+{
+    // 1. Récupérer le thumbnail pour le post courant dans the loop
+    $image = get_field($imageName);
+    $src = null;
+    $density = 0;
+
+    // 2. Récupérer les tailles d'image qui nous intéressent & formater les tailles pour qu'elles soient utilisables dans srcset
+    $sizes = array_map(function ($size) use ($image, &$src, &$density) {
+        $data = $image["sizes"][$size];
+        if (is_null($src)) {
+            $src = $data;
+        }
+        $density++;
+        return $data . " " . $density . "x";
+    }, $sizes);
+
+    // 4. Formater les attributs
+    $srcset = implode(', ', $sizes);
+    $alt = $image['alt'] ?? null;
+
+    // 5. Retourner les attributs générés
+    return 'src="' . $src . '" srcset="' . $srcset . '" alt="' . $alt . '"';
+}
+
+
+function es_create_image_array()
+{
+    $nbr = 3;
+    $imageNames = [];
+    for ($i = 1; $i <= $nbr; $i++) {
+        if (get_field('image' . $i)) {
+            $imageNames[] = 'image' . $i;
+        };
+    }
+    return $imageNames;
+}
+
+
 
 
 /* *****
@@ -176,9 +258,12 @@ function es_image_sizes()
 {
     //capsules thumbnail
     add_image_size('capsule-thumbnail-small', 236, 236, true);
+    add_image_size('capsule-thumbnail-small-double', 472, 472, true);
     add_image_size('capsule-thumbnail-regular', 328, 328, true);
+    add_image_size('capsule-thumbnail-regular-double', 656, 656, true);
     //capsule content
-    add_image_size('capsule-thumbnail-regular', 430, 430, true);
+    add_image_size('capsule-content-large', 430, 430, true);
+    add_image_size('capsule-content-large-double', 860, 860, true);
 }
 /* *****
 * Enable thumbnails support

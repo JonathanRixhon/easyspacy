@@ -2,15 +2,27 @@
   color: $dark-blue;
   background-color: $white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding: 0.5em 0;
+  padding: 0.5em 9.72972973%;
   font-size: $size-regular;
-  &__logo {
-    display: block;
+  //media queries
+  //plus grand que 860px
+  @media (max-width: 860px) {
+    //background-color: red;
   }
+  //plus grand que 1440px
+  @media (min-width: 1440px) {
+    //background-color: green;
+    justify-content: center;
+    .main-navigation {
+      margin: 0 41px;
+    }
+  }
+  //fin media queries
   .main-navigation {
-    width: 68.75%;
+    max-width: 950px;
+    flex: 1;
     &__list {
       margin: 0 auto;
       display: flex;
@@ -19,12 +31,15 @@
     &__link {
       @include no-style-link;
       &_current {
-        font-weight: bold;
+        font-weight: 700;
       }
       &:hover {
-        font-weight: bold;
+        font-weight: 700;
       }
     }
+  }
+  &__logo {
+    display: block;
   }
 
   //Style du formulaire de recherche
@@ -33,11 +48,11 @@
     &__search-input {
       color: transparent;
       max-width: 56px;
-      line-height: 52px;
+      line-height: 2.88888889em;
       border-radius: 100vh;
       border: 2px solid $dark-blue;
       background-color: transparent;
-      transition: all 0.25s;
+      transition: all ease-out 0.5s;
       &:focus {
         @include search-open;
       }

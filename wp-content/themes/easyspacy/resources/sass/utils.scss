@@ -1,3 +1,6 @@
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 //variable
 //COLORS
 $dark-blue: #1a4a51;
@@ -8,9 +11,20 @@ $orange: #eeb05e;
 $red: #c85b5b;
 //sizes
 $size-regular: 1.125em;
+$size-title-capsule: 1.25em;
 $from-size-folded: 56px;
 $all-line-height: 1.5;
 //mixins
+@mixin link-bottom {
+  &__title {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+  }
+  &__link {
+    @include no-style-link;
+    text-decoration: underline;
+  }
+}
 @mixin no-text-button {
   text-indent: -9000px;
 }
@@ -45,8 +59,7 @@ html {
 }
 
 body {
-  background-color: $dark-white;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
 }
 
