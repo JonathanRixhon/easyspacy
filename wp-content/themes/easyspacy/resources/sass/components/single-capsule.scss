@@ -1,0 +1,128 @@
+.single-capsule {
+  @include font-opensans;
+  background-color: $dark-white;
+}
+.info-capsule {
+  padding-top: 1.42857143em;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  &__title {
+    @include font-exo;
+    font-size: $size-title-second;
+    order: -2;
+  }
+  &__date {
+    font-size: $size-title-third;
+    position: relative;
+    word-wrap: no-wrap;
+    text-indent: -99999px;
+    overflow: hidden;
+    align-self: center;
+    &_content {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-indent: 0;
+      text-align: left;
+    }
+  }
+  &__difficulty {
+    align-self: center;
+    font-size: $size-title-third;
+    text-align: center;
+    order: -1;
+    grid-column: 2/3;
+    grid-row: 1/3;
+    &_content {
+      display: block;
+    }
+  }
+  &__progression {
+    display: block;
+    width: 66.315789%;
+    grid-column: span 2;
+    margin: 0 auto;
+  }
+}
+.actions {
+  &__list {
+    padding: 1.11111111em 0;
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    color: $white;
+  }
+  &__item {
+    margin-right: 0.55555556em;
+  }
+  &__link {
+    &_share {
+      padding: 0.36111111em 1em;
+      background-color: $dark-blue;
+      border-radius: 0.55555556em;
+      @include shadow-capsule;
+    }
+    &_copy-link {
+      padding: 0.36111111em 1em;
+      background-color: $dark-blue;
+      border-radius: 0.55555556em;
+      @include shadow-capsule;
+    }
+    &_instagram {
+      display: block;
+      border-radius: 0.55555556em;
+      padding: 0.36111111em 1em;
+      background-color: $dark-blue;
+      @include shadow-capsule;
+      @include no-style-link;
+    }
+  }
+  // 13/2
+}
+.fig-slider {
+  background-color: $white;
+}
+.watch-capsule {
+  .figure {
+    &__wrapper {
+      max-width: 430px;
+      display: flex;
+      overflow: hidden;
+    }
+    &__image {
+      display: block;
+    }
+    &__list {
+      display: flex;
+      justify-content: center;
+      li + li {
+        margin-left: 1em;
+      }
+    }
+    &__link {
+      display: block;
+      text-indent: -9999px;
+      @include no-style-link;
+      width: 15px;
+      height: 15px;
+      border: 1px solid $dark-blue;
+      border-radius: 100vh;
+      box-shadow: inset 0 0 0 1px $white;
+      &_current {
+        background-color: $dark-blue;
+      }
+    }
+  }
+}
+
+/*  <a href="http://www.facebook.com/sharer.php?u=<?= the_permalink(); ?>" target="_blank" class="actions___link_share-facebook">
+                    Partager sur facebook
+                </a>
+                <a href="http://twitter.com/share?url=<?= the_permalink() ?>&text=Simple Share Buttons&hashtags=simplesharebuttons" target="_blank" class="actions___link_share-instagram">
+                    Partager sur twitter
+                </a> */

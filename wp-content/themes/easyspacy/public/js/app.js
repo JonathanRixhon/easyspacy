@@ -151,7 +151,11 @@ window.addEventListener('load', function (e) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./search-form.js": "./wp-content/themes/easyspacy/resources/js/parts/search-form.js"
+	"./comment-form.js": "./wp-content/themes/easyspacy/resources/js/parts/comment-form.js",
+	"./copy-link.js": "./wp-content/themes/easyspacy/resources/js/parts/copy-link.js",
+	"./search-form.js": "./wp-content/themes/easyspacy/resources/js/parts/search-form.js",
+	"./slider.js": "./wp-content/themes/easyspacy/resources/js/parts/slider.js",
+	"./sort-by.js": "./wp-content/themes/easyspacy/resources/js/parts/sort-by.js"
 };
 
 
@@ -173,6 +177,115 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "./wp-content/themes/easyspacy/resources/js/parts sync recursive \\.js$";
+
+/***/ }),
+
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/comment-form.js":
+/*!************************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/comment-form.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CommentForm; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CommentForm = /*#__PURE__*/function () {
+  function CommentForm(element) {
+    var _this = this;
+
+    _classCallCheck(this, CommentForm);
+
+    var eltFirstname, eltName;
+    this.authorInput = element.querySelector('.author');
+    element.addEventListener('input', function (e) {
+      if (e.target.classList.contains('comment-form__firstname-input')) {
+        eltFirstname = e.target.value;
+      } else if (e.target.classList.contains('comment-form__name-input')) {
+        eltName = e.target.value;
+      }
+
+      _this.authorInput.value = "".concat(eltFirstname, " ").concat(eltName);
+    });
+  }
+
+  _createClass(CommentForm, null, [{
+    key: "selector",
+    get: function get() {
+      return '#commentform';
+    }
+  }]);
+
+  return CommentForm;
+}();
+
+
+
+/***/ }),
+
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/copy-link.js":
+/*!*********************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/copy-link.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CopyLink; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CopyLink = /*#__PURE__*/function () {
+  function CopyLink(element) {
+    var _this = this;
+
+    _classCallCheck(this, CopyLink);
+
+    element.addEventListener('click', function (e) {
+      _this.copyToClipboard(_this.getUrl());
+    });
+  }
+
+  _createClass(CopyLink, [{
+    key: "getUrl",
+    value: function getUrl() {
+      return window.location.href;
+    }
+  }, {
+    key: "copyToClipboard",
+    value: function copyToClipboard(url) {
+      var elt = document.createElement('textarea');
+      elt.value = url; //faire en sorte que le text aria input soir invisible
+
+      elt.classList.add('sro');
+      elt.setAttribute('aria-hidden', 'true'); //ajouter l'elt au body, le sélectionner et le copier
+
+      document.body.appendChild(elt);
+      elt.select();
+      document.execCommand('copy');
+      document.body.removeChild(elt);
+    }
+  }], [{
+    key: "selector",
+    get: function get() {
+      return '.copy-link';
+    }
+  }]);
+
+  return CopyLink;
+}();
+
+
 
 /***/ }),
 
@@ -237,6 +350,199 @@ var SearchForm = /*#__PURE__*/function () {
   }]);
 
   return SearchForm;
+}();
+
+
+
+/***/ }),
+
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/slider.js":
+/*!******************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/slider.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Slider; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Slider = /*#__PURE__*/function () {
+  function Slider(element) {
+    var _this = this;
+
+    _classCallCheck(this, Slider);
+
+    this.element = element;
+    this.init();
+    element.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      _this.slideImg();
+
+      _this.addClass();
+    });
+  }
+
+  _createClass(Slider, [{
+    key: "init",
+    value: function init() {
+      this.allImagesElt = this.element.querySelectorAll('.figure__image');
+      this.allLinks = document.querySelectorAll('.figure__link'); //preparing slider var
+
+      this.imgArray = Array.from(this.allImagesElt);
+      this.value = -430;
+      this.times = 0;
+      this.addClass();
+    }
+  }, {
+    key: "checkTimes",
+    value: function checkTimes() {
+      if (this.times === this.imgArray.length - 1) {
+        this.times = this.imgArray.length - 1;
+      } else {
+        this.times++;
+      }
+    }
+  }, {
+    key: "slideImg",
+    value: function slideImg() {
+      var _this2 = this;
+
+      /* this.checkTimes() */
+      this.value = -430 * this.times;
+      this.imgArray.forEach(function (image) {
+        image.style.transform = "translate(".concat(_this2.value, "px)");
+      });
+    } //logic for css classes
+
+  }, {
+    key: "addClass",
+    value: function addClass() {
+      var _this3 = this;
+
+      this.allLinks.forEach(function (link, index) {
+        link.addEventListener('click', function (e) {
+          _this3.clearClasses();
+
+          link.classList.add('figure__link_current');
+          _this3.times = index;
+
+          _this3.slideImg();
+
+          e.preventDefault();
+        });
+      });
+    }
+  }, {
+    key: "clearClasses",
+    value: function clearClasses() {
+      this.allLinks.forEach(function (link) {
+        link.classList.remove('figure__link_current');
+      });
+    }
+  }], [{
+    key: "selector",
+    get: function get() {
+      return '.figure__wrapper';
+    }
+  }]);
+
+  return Slider;
+}();
+
+
+
+/***/ }),
+
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/sort-by.js":
+/*!*******************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/sort-by.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SortBy; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var SortBy = /*#__PURE__*/function () {
+  function SortBy(element) {
+    var _this = this;
+
+    _classCallCheck(this, SortBy);
+
+    this.xhr = this.httpRequestInit();
+    window.addEventListener('click', function (e) {
+      _this.redirect();
+    });
+  }
+
+  _createClass(SortBy, [{
+    key: "httpRequestInit",
+    value: function httpRequestInit() {
+      var httpRequest = false;
+
+      if (window.XMLHttpRequest) {
+        // Mozilla, Safari,...
+        httpRequest = new XMLHttpRequest();
+
+        if (httpRequest.overrideMimeType) {
+          httpRequest.overrideMimeType('text/xml');
+        }
+      } else if (window.ActiveXObject) {
+        // IE
+        try {
+          httpRequest = new ActiveXObject('Msxml2.XMLHTTP');
+        } catch (e) {
+          try {
+            httpRequest = new ActiveXObject('Microsoft.XMLHTTP');
+          } catch (e) {}
+        }
+      }
+
+      if (!httpRequest) {
+        alert('Abandon :( Impossible de créer une instance XMLHTTP');
+        return false;
+      }
+
+      return httpRequest;
+    }
+  }, {
+    key: "redirect",
+    value: function redirect() {
+      var _this2 = this;
+
+      this.xhr.onreadystatechange = function () {
+        if (_this2.xhr.readyState === 4) {
+          console.log(_this2.xhr.responseText);
+        }
+      };
+
+      this.xhr.open('GET', '', true); // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
+
+      this.xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest'); // On lance la requête
+
+      this.xhr.send();
+    }
+  }], [{
+    key: "selector",
+    get: function get() {
+      return '.sort-capsule';
+    }
+  }]);
+
+  return SortBy;
 }();
 
 

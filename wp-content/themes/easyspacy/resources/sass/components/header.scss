@@ -1,8 +1,9 @@
 .top {
-  color: $dark-blue;
+  @include font-opensans;
   background-color: $white;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   padding: 0.5em 9.72972973%;
   font-size: $size-regular;
@@ -12,7 +13,7 @@
     //background-color: red;
   }
   //plus grand que 1440px
-  @media (min-width: 1440px) {
+  @media (min-width: 1441px) {
     //background-color: green;
     justify-content: center;
     .main-navigation {
@@ -24,7 +25,6 @@
     max-width: 950px;
     flex: 1;
     &__list {
-      margin: 0 auto;
       display: flex;
       justify-content: space-around;
     }

@@ -1,8 +1,6 @@
 .bottom {
-  font-size: $size-regular;
+  @include font-opensans;
   background-color: $white;
-  color: $dark-blue;
-  line-height: $all-line-height;
   display: flex;
   justify-content: space-around;
   align-items: top;

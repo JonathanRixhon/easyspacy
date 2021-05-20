@@ -65,7 +65,7 @@ function es_custom_post_type()
         'public' => true,
         'menu_position' => 5,
         'menu_icon' => 'dashicons-admin-site-alt',
-        'supports' => ['title', 'editor', 'thumbnail'],
+        'supports' => ['title', 'editor', 'comments', 'thumbnail'],
     ]);
     /* Actualités */
     register_post_type('new', [
@@ -144,16 +144,19 @@ function es_the_thumbnail_attributes_width($sizes = [])
     // 5. Retourner les attributs générés
     return 'src="' . $src . '" srcset="' . $srcset . '" alt="' . $alt . '"';
 }
-function es_the_thumbnail_attributes_density($sizes = [])
+function es_the_thumbnail_attributes_density($sizes = [], $post = null)
 {
     // 1. Récupérer le thumbnail pour le post courant dans the loop
-    $thumbnail = get_post(get_post_thumbnail_id());
+    if (isset($post)) {
+        $thumbnail = get_post(get_post_thumbnail_id($post));
+    } else {
+        $thumbnail = get_post(get_post_thumbnail_id());
+    }
+    //var_dump($thumbnail);
     $thumbnail_meta = get_post_meta($thumbnail->ID);
 
     $src = null;
     $density = 0;
-
-
 
     // 2. Récupérer les tailles d'image qui nous intéressent & formater les tailles pour qu'elles soient utilisables dans srcset
     $sizes = array_map(function ($size) use ($thumbnail, &$src, &$density) {
@@ -212,6 +215,69 @@ function es_create_image_array()
 
 
 
+
+/* *****
+ * GET comments for the right post
+ * *****/
+function es_post_comments_array()
+{
+    //Get comments for the post id
+    $comments = get_comments(['post_id' => get_the_ID()]);
+    $comments = array_map(function ($comment) {
+        $id = $comment->comment_ID;
+        $author = $comment->comment_author;
+        $content = $comment->comment_content;
+        return compact('id', 'author', 'content');
+    }, $comments);
+    return $comments;
+}
+// change comment form fields order
+add_filter('comment_form_fields', 'mo_comment_fields_custom_order');
+function mo_comment_fields_custom_order($fields)
+{
+    $author_field = $fields['author'];
+    $comment_field = $fields['comment'];
+    unset($fields['comment']);
+    unset($fields['author']);
+    unset($fields['email']);
+    unset($fields['url']);
+    // the order of fields is the order below, change it as needed:
+    $fields['author'] = $author_field;
+    $fields['comment'] = $comment_field;
+
+    // done ordering, now return the fields:
+    return $fields;
+}
+
+function es_form_array()
+{
+    return [
+        'logged_in_as'       => null,
+        'title_reply'        => null,
+        // change the title of send button 
+        'label_submit' => 'Envoyer',
+        'submit_field' => '%1$s %2$s',
+        // remove "Text or HTML to be displayed after the set of comment fields"
+        'comment_form_top' => '',
+        'comment_notes_before' => '',
+        'comment_notes_after' => '',
+        // redefine your own textarea (the comment body)
+        'comment_field' => '<label for="comment">Message</label>' . '<textarea id="comment" name="comment" aria-required="true" required></textarea>',
+        'fields' => apply_filters(
+            'comment_form_default_fields',
+            [
+                'author' =>
+                '<label for="firstname" class="comment-form__firstname-label">Prénom</label>
+                <input type="text" name="authorFirstname" id="firstname" class="comment-form__firstname-input" required>
+                <label for="name" class="comment-form__name-label">Nom</label>
+                <input type="text" name="name" class="comment-form__name-input" id="name" required>
+                <input type="hidden" name="author" class="author" value="">',
+                'email' => null,
+                'url' => null,
+            ]
+        ),
+    ];
+}
 
 /* *****
  * Return a menu structure for display

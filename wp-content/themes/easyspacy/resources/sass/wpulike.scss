@@ -1,0 +1,51 @@
+.wpulike.wpulike-animated-heart {
+  padding: 0;
+  .wp_ulike_general_class {
+    height: auto;
+    width: auto;
+  }
+  .wp_ulike_btn {
+    background-color: $dark-blue;
+    &:hover {
+      transition: all 0.25s;
+      background-color: $orange;
+    }
+  }
+  path {
+    fill: $white;
+  }
+  .wp_ulike_is_already_liked,
+  .wp_ulike_click_is_disabled,
+  .wp_ulike_is_loading {
+    .wp_ulike_btn {
+      background-color: $orange;
+    }
+    path {
+      fill: $red;
+    }
+  }
+}
+
+.info-capsule {
+  .wp_ulike_btn {
+    padding: 1.11111111em;
+    border-radius: 0.55555556em;
+  }
+}
+
+.dialogue-like {
+  .wpulike {
+    .wp_ulike_btn {
+      border-radius: 100vh;
+      padding: 2.33333333em;
+    }
+    .wpulike-svg-heart-icon {
+      min-width: 36px;
+      height: auto;
+    }
+    .count-box {
+      text-align: center;
+      margin-top: 0.5em;
+    }
+  }
+}
