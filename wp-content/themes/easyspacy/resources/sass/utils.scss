@@ -20,6 +20,44 @@ $size-small-text: 0.77777778em; //14px
 $from-size-folded: 56px;
 $all-line-height: 1.5;
 //mixins
+@mixin dialog-bubble {
+  @include shadow-button;
+  background-color: $white;
+  border-radius: 0.27777778em;
+  position: relative;
+}
+@mixin triangle-right {
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: -3px;
+    bottom: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 15px solid $white;
+    transform-origin: bottom left;
+    transform: rotate(40deg);
+  }
+}
+@mixin triangle-left {
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: -3px;
+    bottom: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 15px solid $white;
+    transform-origin: bottom right;
+    transform: rotate(-40deg);
+  }
+}
 @mixin screen-reader {
   position: absolute;
   overflow: hidden;
@@ -165,7 +203,6 @@ $all-line-height: 1.5;
       }
       &__difficulty-content {
         order: 1;
-        background-color: rosybrown;
         flex: 1;
         text-align: right;
       }
@@ -187,7 +224,7 @@ $all-line-height: 1.5;
   box-shadow: 1px 2px 15px rgba($color: black, $alpha: 0.05);
 }
 @mixin shadow-button {
-  box-shadow: 2px 2px 15px rgba($color: $dark-blue, $alpha: 0.1);
+  box-shadow: 2px 2px 15px rgba($color: black, $alpha: 0.1);
 }
 @mixin font-exo {
   font-family: 'Exo', sans-serif;
@@ -245,7 +282,8 @@ html {
 //reset button
 button,
 input,
-select {
+select,
+textarea {
   padding: 0;
   border: none;
   text-decoration: none;

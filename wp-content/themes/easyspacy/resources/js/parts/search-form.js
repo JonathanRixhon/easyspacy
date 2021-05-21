@@ -18,13 +18,11 @@ export default class SearchForm {
       return
     }
     if (this.searchInput.classList.contains('focused')) {
-      e.preventDefault()
       this.searchInput.classList.remove('focused')
     }
   }
   open() {
     if (!this.searchInput.classList.contains('focused')) {
-      console.log('ouvert')
       this.searchInput.classList.add('focused')
     }
   }

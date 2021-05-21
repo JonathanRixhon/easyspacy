@@ -37,26 +37,9 @@
   width: 88.5416672%;
   margin: 0 auto;
   &__dialog {
-    position: relative;
-    padding: 0.88888889em;
-    background-color: $white;
     margin-bottom: 2em;
-    border-radius: 0.27777778em;
-
-    &::after {
-      content: '';
-      display: block;
-      width: 0;
-      height: 0;
-      position: absolute;
-      left: -3px;
-      bottom: 0;
-      border-top: 8px solid transparent;
-      border-bottom: 8px solid transparent;
-      border-right: 15px solid $white;
-      transform-origin: bottom right;
-      transform: rotate(-40deg);
-    }
+    padding: 0.88888889em;
+    @include dialog-bubble;
     a,
     strong {
       font-weight: 700;

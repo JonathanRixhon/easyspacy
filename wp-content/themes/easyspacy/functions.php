@@ -66,6 +66,7 @@ function es_custom_post_type()
         'menu_position' => 5,
         'menu_icon' => 'dashicons-admin-site-alt',
         'supports' => ['title', 'editor', 'comments', 'thumbnail'],
+        'taxonomies' => ['post_tag']
     ]);
     /* Actualités */
     register_post_type('new', [
@@ -115,6 +116,13 @@ function es_difficulty_moon($difficulty)
     return trim($string);
 }
 
+
+/* *****
+* count the time
+* *****/
+function es_count_the_time()
+{
+}
 /* *****
 * Return thumbnail attributes
 * *****/
@@ -203,18 +211,39 @@ function es_the_content_attributes_density($imageName, $sizes = [])
 
 function es_create_image_array()
 {
-    $nbr = 3;
+    $j = 1;
+    /* $nbr = 5; */
     $imageNames = [];
-    for ($i = 1; $i <= $nbr; $i++) {
+    while (get_field('image' . $j)) {
+        $imageNames[] = 'image' . $j;
+        $j++;
+    }
+    /* for ($i = 1; $i <= $nbr; $i++) {
         if (get_field('image' . $i)) {
             $imageNames[] = 'image' . $i;
         };
-    }
+    } */
     return $imageNames;
 }
 
 
 
+
+/* *****
+ * reedirect after comments
+ * *****/
+
+function es_comment_redirect($location)
+{
+    if (isset($_POST['my_redirect_to'])) // Don't use "redirect_to", internal WP var
+    {
+        $location = $_POST['my_redirect_to'];
+    }
+
+    return $location;
+}
+
+add_filter('comment_post_redirect', 'es_comment_redirect');
 
 /* *****
  * GET comments for the right post
@@ -262,16 +291,19 @@ function es_form_array()
         'comment_notes_before' => '',
         'comment_notes_after' => '',
         // redefine your own textarea (the comment body)
-        'comment_field' => '<label for="comment">Message</label>' . '<textarea id="comment" name="comment" aria-required="true" required></textarea>',
+        'comment_field' => '<label for="comment" class="comment-form__message-label">Message</label>' . '<textarea id="comment" class="comment-form__message-input" name="comment" aria-required="true" required></textarea>',
         'fields' => apply_filters(
             'comment_form_default_fields',
             [
                 'author' =>
-                '<label for="firstname" class="comment-form__firstname-label">Prénom</label>
+                '
+                <h4 class="comment-form__title">Rédigez votre commentaire</h4>
+                <label for="firstname" class="comment-form__firstname-label">Prénom</label>
                 <input type="text" name="authorFirstname" id="firstname" class="comment-form__firstname-input" required>
                 <label for="name" class="comment-form__name-label">Nom</label>
                 <input type="text" name="name" class="comment-form__name-input" id="name" required>
-                <input type="hidden" name="author" class="author" value="">',
+                <input type="hidden" name="author" class="author" value="">
+                <input type="hidden" name="my_redirect_to" value="' . get_permalink() . '/#comments' . '">',
                 'email' => null,
                 'url' => null,
             ]

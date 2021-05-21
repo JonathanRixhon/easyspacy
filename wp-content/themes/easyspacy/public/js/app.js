@@ -152,6 +152,7 @@ window.addEventListener('load', function (e) {
 
 var map = {
 	"./comment-form.js": "./wp-content/themes/easyspacy/resources/js/parts/comment-form.js",
+	"./comments.js": "./wp-content/themes/easyspacy/resources/js/parts/comments.js",
 	"./copy-link.js": "./wp-content/themes/easyspacy/resources/js/parts/copy-link.js",
 	"./search-form.js": "./wp-content/themes/easyspacy/resources/js/parts/search-form.js",
 	"./slider.js": "./wp-content/themes/easyspacy/resources/js/parts/slider.js",
@@ -198,24 +199,58 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var CommentForm = /*#__PURE__*/function () {
   function CommentForm(element) {
-    var _this = this;
-
     _classCallCheck(this, CommentForm);
 
-    var eltFirstname, eltName;
+    this.element = element;
     this.authorInput = element.querySelector('.author');
-    element.addEventListener('input', function (e) {
-      if (e.target.classList.contains('comment-form__firstname-input')) {
-        eltFirstname = e.target.value;
-      } else if (e.target.classList.contains('comment-form__name-input')) {
-        eltName = e.target.value;
-      }
-
-      _this.authorInput.value = "".concat(eltFirstname, " ").concat(eltName);
-    });
+    this.allInput = this.element.querySelectorAll('input');
+    this.txtAreaElt = this.element.querySelector('.comment-form__message-input');
+    this.eltFirstname = undefined;
+    this.eltName = undefined;
+    this.init();
   }
 
-  _createClass(CommentForm, null, [{
+  _createClass(CommentForm, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.allInput = Array.from(this.allInput);
+      this.allInput.push(this.txtAreaElt); //Gestion du input hidden
+
+      this.element.addEventListener('input', function (e) {
+        _this.adjustValue(e);
+      }); //Gestion des index si il y a quelque chose
+
+      this.allInput.forEach(function (input) {
+        input.addEventListener('input', function (e) {
+          _this.manageIndex(e.target);
+        });
+      });
+    }
+  }, {
+    key: "manageIndex",
+    value: function manageIndex(input) {
+      if (input.value) {
+        input.style.zIndex = '1';
+      }
+
+      if (!input.value) {
+        input.style = '';
+      }
+    }
+  }, {
+    key: "adjustValue",
+    value: function adjustValue(e) {
+      if (e.target.classList.contains('comment-form__firstname-input')) {
+        this.eltFirstname = e.target.value;
+      } else if (e.target.classList.contains('comment-form__name-input')) {
+        this.eltName = e.target.value;
+      }
+
+      this.authorInput.value = "".concat(this.eltFirstname, " ").concat(this.eltName);
+    }
+  }], [{
     key: "selector",
     get: function get() {
       return '#commentform';
@@ -223,6 +258,69 @@ var CommentForm = /*#__PURE__*/function () {
   }]);
 
   return CommentForm;
+}();
+
+
+
+/***/ }),
+
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/comments.js":
+/*!********************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/comments.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Comments; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Comments = /*#__PURE__*/function () {
+  function Comments(element) {
+    _classCallCheck(this, Comments);
+
+    this.element = element;
+    this.button = document.querySelector('.existing-comments__discover');
+    this.init();
+  }
+
+  _createClass(Comments, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.button.addEventListener('click', function (e) {
+        _this.element.classList.toggle('existing-comments_open');
+
+        _this.changeTextContent(e);
+      });
+    }
+  }, {
+    key: "changeTextContent",
+    value: function changeTextContent(e) {
+      var text;
+
+      if (this.element.classList.contains('existing-comments_open')) {
+        text = 'Masquer les commentaires';
+      } else {
+        text = 'Lire d’autre commentaires';
+      }
+
+      e.target.textContent = text;
+    }
+  }], [{
+    key: "selector",
+    get: function get() {
+      return '.existing-comments';
+    }
+  }]);
+
+  return Comments;
 }();
 
 
@@ -330,7 +428,6 @@ var SearchForm = /*#__PURE__*/function () {
       }
 
       if (this.searchInput.classList.contains('focused')) {
-        e.preventDefault();
         this.searchInput.classList.remove('focused');
       }
     }
@@ -338,7 +435,6 @@ var SearchForm = /*#__PURE__*/function () {
     key: "open",
     value: function open() {
       if (!this.searchInput.classList.contains('focused')) {
-        console.log('ouvert');
         this.searchInput.classList.add('focused');
       }
     }
@@ -374,39 +470,70 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var Slider = /*#__PURE__*/function () {
   function Slider(element) {
-    var _this = this;
-
     _classCallCheck(this, Slider);
 
     this.element = element;
+    this.allImagesElt = this.element.querySelectorAll('.figure__image');
+    this.buttons = document.querySelectorAll('.fig-slider__nav-button');
+    this.phrase = document.querySelector('.progression__phrase');
+    this.rocket = document.querySelector('.progression__rocket');
+    this.progress = document.querySelector('.progression__bar');
+    this.allLinks = document.querySelectorAll('.figure__link'); //
+
+    this.value = -430;
+    this.times = 0; //
+
     this.init();
-    element.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      _this.slideImg();
-
-      _this.addClass();
-    });
   }
 
   _createClass(Slider, [{
     key: "init",
     value: function init() {
-      this.allImagesElt = this.element.querySelectorAll('.figure__image');
-      this.allLinks = document.querySelectorAll('.figure__link'); //preparing slider var
+      this.allLinks[0].classList.add('figure__link_current');
+      this.estimatedTime = this.phrase.dataset.estime; //preparing slider var
 
       this.imgArray = Array.from(this.allImagesElt);
-      this.value = -430;
-      this.times = 0;
+      this.imgLen = this.imgArray.length - 1;
       this.addClass();
+      this.update();
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      var _this = this;
+
+      this.buttons.forEach(function (button) {
+        button.addEventListener('click', function (e) {
+          if (button.classList.contains('fig-slider__nav-button_prev')) {
+            _this.checkTimes(-1);
+          } else {
+            _this.checkTimes(1);
+          }
+
+          _this.addClass();
+
+          _this.slideImg();
+        });
+      });
+      this.allLinks.forEach(function (link, index) {
+        link.addEventListener('click', function (e) {
+          _this.times = index;
+
+          _this.addClass();
+
+          e.preventDefault();
+        });
+      });
     }
   }, {
     key: "checkTimes",
-    value: function checkTimes() {
-      if (this.times === this.imgArray.length - 1) {
-        this.times = this.imgArray.length - 1;
-      } else {
-        this.times++;
+    value: function checkTimes(value) {
+      if (value > 0 && this.times < this.imgArray.length - 1) {
+        this.times += value;
+      }
+
+      if (value < 0 && this.times > 0) {
+        this.times += value;
       }
     }
   }, {
@@ -414,30 +541,19 @@ var Slider = /*#__PURE__*/function () {
     value: function slideImg() {
       var _this2 = this;
 
-      /* this.checkTimes() */
       this.value = -430 * this.times;
       this.imgArray.forEach(function (image) {
         image.style.transform = "translate(".concat(_this2.value, "px)");
       });
-    } //logic for css classes
-
+    }
   }, {
     key: "addClass",
     value: function addClass() {
-      var _this3 = this;
-
-      this.allLinks.forEach(function (link, index) {
-        link.addEventListener('click', function (e) {
-          _this3.clearClasses();
-
-          link.classList.add('figure__link_current');
-          _this3.times = index;
-
-          _this3.slideImg();
-
-          e.preventDefault();
-        });
-      });
+      this.updatePhrase();
+      this.updateProgress();
+      this.clearClasses();
+      this.allLinks[this.times].classList.add('figure__link_current');
+      this.slideImg();
     }
   }, {
     key: "clearClasses",
@@ -445,6 +561,40 @@ var Slider = /*#__PURE__*/function () {
       this.allLinks.forEach(function (link) {
         link.classList.remove('figure__link_current');
       });
+    }
+  }, {
+    key: "updateProgress",
+    value: function updateProgress() {
+      var placement;
+
+      if (this.times === 0 || this.times <= 1) {
+        placement = 0;
+      } else {
+        placement = "".concat((this.times - 1) / (this.imgLen - 1) * 100, "%");
+      }
+
+      if (this.times === this.imgLen || this.times <= 1) {
+        this.rocket.style.opacity = 0;
+      } else {
+        this.rocket.style.opacity = 1;
+      }
+
+      this.rocket.style.left = placement;
+      this.progress.setAttribute('max', this.imgLen - 1);
+      this.progress.value = this.times <= 1 ? 0 : this.times - 1;
+    }
+  }, {
+    key: "updatePhrase",
+    value: function updatePhrase() {
+      var value;
+
+      if (this.times === 0) {
+        value = this.imgLen * this.estimatedTime;
+      } else {
+        value = (this.imgLen - this.times + 1) * this.estimatedTime;
+      }
+
+      this.phrase.textContent = "".concat(value, " minute(s) restantes");
     }
   }], [{
     key: "selector",

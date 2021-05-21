@@ -1,5 +1,8 @@
 .wpulike.wpulike-animated-heart {
   padding: 0;
+  .count-box {
+    color: $dark-blue;
+  }
   .wp_ulike_general_class {
     height: auto;
     width: auto;
@@ -33,9 +36,11 @@
   }
 }
 
-.dialogue-like {
+.interactions {
   .wpulike {
     .wp_ulike_btn {
+      display: block;
+      margin: 0 auto;
       border-radius: 100vh;
       padding: 2.33333333em;
     }
@@ -44,8 +49,19 @@
       height: auto;
     }
     .count-box {
+      color: $dark-blue;
       text-align: center;
-      margin-top: 0.5em;
+      display: block;
+      margin: 0.5em 0 0 0;
+    }
+    .wp_ulike_general_class {
+      margin-bottom: 2.77777778em;
+      &::after {
+        content: "J'aime !";
+        font-weight: 700;
+        display: block;
+        text-align: center;
+      }
     }
   }
 }
