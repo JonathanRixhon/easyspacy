@@ -10,20 +10,25 @@ export default class SearchForm {
     )
 
     document.addEventListener('click', e => this.bodyclick(e))
-    this.searchForm.addEventListener('click', e => this.open(e))
+    this.searchForm.addEventListener('click', e => this.open())
+    this.searchInput.addEventListener('focusin', e => this.open())
+    this.searchInput.addEventListener('focusout', e => this.close())
   }
 
   bodyclick(e) {
     if (e.target === this.searchForm || this.searchForm.contains(e.target)) {
       return
     }
-    if (this.searchInput.classList.contains('focused')) {
-      this.searchInput.classList.remove('focused')
-    }
+    this.close()
   }
   open() {
-    if (!this.searchInput.classList.contains('focused')) {
-      this.searchInput.classList.add('focused')
+    if (!this.searchForm.classList.contains('focused')) {
+      this.searchForm.classList.add('focused')
+    }
+  }
+  close() {
+    if (this.searchForm.classList.contains('focused')) {
+      this.searchForm.classList.remove('focused')
     }
   }
 }

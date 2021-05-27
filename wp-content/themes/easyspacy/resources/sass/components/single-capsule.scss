@@ -3,7 +3,8 @@
   background-color: $dark-white;
 }
 .info-capsule {
-  max-width: 1144px;
+  max-width: $width-fixed-px;
+  width: $width-fixed;
   padding-top: 1.42857143em;
   margin: 0 auto 2.77777778em;
   display: grid;
@@ -33,6 +34,7 @@
   }
   &__difficulty {
     align-self: center;
+    justify-self: end;
     font-size: $size-title-third;
     text-align: center;
     order: -1;
@@ -95,14 +97,12 @@
   &__rocket {
     display: block;
     background-color: $orange;
-    border-radius: 100vh;
-    padding: 0.77777778em 0;
-    width: 63px;
-    top: calc(50% - 0.77777778em);
+    top: calc(50% - 32px);
     position: absolute;
     transition: all cubic-bezier(0.09, 0.48, 0.29, 1) 1s;
-    transform: translate(-5px);
+    transform: translate(-5px) rotate(90deg);
     opacity: 0;
+    @include sprite-fct(29px, 64px, -21px, 0px);
   }
   &__phrase {
     grid-column: span 2;
@@ -115,11 +115,12 @@
     padding: 1.11111111em 0;
     grid-column: span 2;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     color: $white;
   }
   &__item {
-    margin-right: 0.55555556em;
+    margin: 0 0.55555556em 0.55555556em 0;
   }
   &__link {
     &_share {
@@ -150,21 +151,25 @@
 .fig-slider {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  max-width: 1144px;
+  max-width: $width-fixed-px;
+  width: $width-fixed;
+  grid-gap: $size-title-second;
   margin: 0 auto;
   justify-items: center;
   align-items: center;
   &__nav-button {
     cursor: pointer;
-    text-indent: -9999px;
-    background-color: $dark-blue;
-    width: 20px;
-    min-height: 40px;
+    @include sprite-fct(20px, 44px, 0px, 0px);
+    display: block;
+    text-indent: -9999em;
+    text-transform: uppercase;
+    overflow: hidden;
     &_prev {
-      margin-right: 2em;
+      transform: rotate(180deg);
+      margin-right: auto;
     }
     &_next {
-      margin-left: 2em;
+      margin-left: auto;
     }
   }
 }
@@ -172,50 +177,52 @@
   background-color: $white;
   padding: 2.22222222em 0;
   margin-bottom: 2.77777778em;
+}
 
-  .figure {
-    &__wrapper {
-      max-width: 430px;
-      display: flex;
-      overflow: hidden;
-    }
-    &__image {
-      display: block;
-      transition: ease-in-out 0.25s;
-    }
-    &__list {
-      display: flex;
-      justify-content: center;
-      cursor: pointer;
-      li + li {
-        margin-left: 0.4em;
-      }
-    }
-    &__link {
-      display: block;
-      text-indent: -9999px;
-      @include no-style-link;
-      width: 10px;
-      height: 10px;
-      border: 1px solid $white;
-      border-radius: 100vh;
-      &_current {
-        background-color: $white;
-      }
-    }
-    &__interation {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-    &__advencement {
-      position: absolute;
-      margin: 0.5em 0;
-      width: 100%;
-      bottom: 0.3em;
+.figure {
+  &__wrapper {
+    max-width: 430px;
+    display: flex;
+    overflow: hidden;
+  }
+  &__image {
+    transition: ease-in-out 0.25s;
+  }
+  &__list {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    li + li {
+      margin-left: 0.4em;
     }
   }
+  &__link {
+    display: block;
+    text-indent: -9999px;
+    @include no-style-link;
+    width: 10px;
+    height: 10px;
+    border: 1px solid $white;
+    border-radius: 100vh;
+    &_current {
+      background-color: $white;
+    }
+  }
+  &__interaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    justify-self: stretch;
+    position: relative;
+  }
+  &__advencement {
+    position: absolute;
+    margin: 0.5em 0;
+    width: 100%;
+    bottom: 0.3em;
+  }
 }
+
 .interactions {
   margin-bottom: 2.77777778em;
   &__like-dialog {
@@ -249,7 +256,7 @@
   background-color: $white;
   padding: 2.77777778em 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(300px, 562px)) /* repeat(2, 562px) */;
+  grid-template-columns: repeat(2, 562px) /* repeat(2, 562px) */;
   column-gap: 1.11111111em;
   row-gap: 1.11111111em;
   justify-content: center;
@@ -260,22 +267,37 @@
     font-size: 1.44444444em;
   }
 }
+.single-comment {
+  width: 100%;
+
+  &__content {
+    hyphens: auto;
+    word-wrap: break-word;
+  }
+
+  &__name {
+    font-weight: 700;
+  }
+}
 .existing-comments {
   background-color: $dark-white;
   border-radius: 1.11111111em;
   padding: 1.11111111em 2em;
   position: relative;
   overflow: hidden;
-  max-height: 15.833333332em;
-  transition: max-height ease-in-out 0.4s;
+  height: 15.833333332em;
+  transition: height ease-in-out 0.4s;
+
   &__wrapper {
     height: 100%;
     padding-bottom: 1.5em;
   }
+
   &_open {
-    max-height: 75vh;
+    height: 75vh;
     .existing-comments__wrapper {
-      overflow: scroll;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
   }
   &__discover {
@@ -288,116 +310,111 @@
     width: 100%;
     padding: 0.16666667em 0;
     cursor: pointer;
+    border-radius: 0 0 1.11111111em 1.11111111em;
   }
 }
 .comment-form {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: 'title title' 'name firstname' 'message message' 'message message' '. send';
   grid-gap: 1.11111111em;
-  label {
+  &_admin {
+    grid-template-areas: 'title title' 'message message' 'message message' 'send send';
+
+    .comment-form__message-input {
+      @include label;
+    }
+    .comment-form__message-label {
+      @include label;
+      text-indent: 0.77777778em;
+      padding: 0.5em 0;
+    }
+    .submit {
+      @include big-button;
+      margin: 0;
+      padding: 0.55555556em 0;
+    }
+  }
+  label,
+  textarea,
+  button,
+  input {
     cursor: pointer;
   }
+
   &__title {
-    grid-column: 1/-1;
+    grid-area: title;
     font-weight: 700;
   }
-  &__firstname-label {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    text-indent: 0.77777778em;
-    grid-column: 1/2;
-    grid-row: 1/2;
-    padding: 0.5em 0;
-  }
-  &__firstname-input {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    grid-column: 1/2;
-    grid-row: 2/3;
-    z-index: -1;
-    text-align: left;
-    text-indent: 0.5em;
 
-    &:focus {
-      z-index: 1;
+  &__firstname {
+    &-label {
+      @include label;
+      grid-area: firstname;
+      text-indent: 0.77777778em;
+      padding: 0.5em 0;
+    }
+    &-input {
+      @include label;
+      grid-area: firstname;
+      z-index: -1;
+      text-align: left;
+      text-indent: 0.5em;
+      &:focus {
+        z-index: 1;
+      }
     }
   }
-  &__firstname-label {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    text-indent: 0.77777778em;
-    grid-column: 1/2;
-    grid-row: 2/3;
-    padding: 0.5em 0;
-  }
-  &__name-input {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    grid-column: 2/3;
-    grid-row: 2/2;
-    z-index: -1;
-    text-align: left;
-    text-indent: 0.5em;
-    &:focus {
-      z-index: 1;
+  &__name {
+    &-input {
+      @include label;
+      z-index: -1;
+      text-align: left;
+      text-indent: 0.5em;
+      grid-area: name;
+      &:focus {
+        z-index: 1;
+      }
+    }
+    &-label {
+      @include label;
+      text-indent: 0.77777778em;
+      padding: 0.5em 0;
+      grid-area: name;
     }
   }
-  &__name-label {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    text-indent: 0.77777778em;
-    grid-column: 2/3;
-    grid-row: 2/2;
-    padding: 0.5em 0;
-  }
-  &__message-input {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    grid-column: 1/-1;
-    grid-row: 3/4;
-    resize: none;
-    min-height: 5.55555556em;
-    z-index: -1;
-    text-align: left;
-    text-indent: 0.5em;
-    padding: 0.5em;
-    &:focus {
-      z-index: 1;
+  &__message {
+    &-input {
+      @include label;
+      resize: none;
+      min-height: 5.55555556em;
+      z-index: -1;
+      text-align: left;
+      text-indent: 0.5em;
+      padding: 0.5em;
+      grid-area: message;
+      &:focus {
+        z-index: 1;
+      }
     }
-  }
-  &__message-label {
-    background-color: $dark-white;
-    border: 1px solid $dark-blue;
-    border-radius: 0.55555556em;
-    text-indent: 0.77777778em;
-    grid-column: 1/-1;
-    grid-row: 3/4;
-    padding: 0.5em 0;
+    &-label {
+      @include label;
+      text-indent: 0.77777778em;
+      padding: 0.5em 0;
+      grid-area: message;
+    }
   }
   .submit {
     @include big-button;
     margin: 0;
     grid-column: 2/3;
     padding: 0.55555556em 0;
-    cursor: pointer;
-  }
-}
-.single-comment {
-  overflow-wrap: anywhere;
-
-  &__name {
-    font-weight: 700;
+    grid-area: send;
   }
 }
 .semblable {
   @include capsule-small;
-  max-width: 1144px;
+  max-width: $width-fixed-px;
+  width: $width-fixed;
   margin: 0 auto;
   padding-bottom: 2.77777778em;
   &__title {
@@ -405,9 +422,12 @@
     font-size: 1.44444444em;
   }
 }
-/*  <a href="http://www.facebook.com/sharer.php?u=<?= the_permalink(); ?>" target="_blank" class="actions___link_share-facebook">
-                    Partager sur facebook
-                </a>
-                <a href="http://twitter.com/share?url=<?= the_permalink() ?>&text=Simple Share Buttons&hashtags=simplesharebuttons" target="_blank" class="actions___link_share-instagram">
-                    Partager sur twitter
-                </a> */
+@import './single-capsule-media.scss';
+/*  
+<a href="http://www.facebook.com/sharer.php?u=<?= the_permalink(); ?>" target="_blank" class="actions___link_share-facebook">
+    Partager sur facebook
+</a>
+<a href="http://twitter.com/share?url=<?= the_permalink() ?>&text=Simple Share Buttons&hashtags=simplesharebuttons" target="_blank" class="actions___link_share-instagram">
+    Partager sur twitter
+</a> 
+                */

@@ -11,7 +11,6 @@ export default class Slider {
     this.progress = document.querySelector('.progression__bar')
     this.allLinks = document.querySelectorAll('.figure__link')
     //
-    this.value = -430
     this.times = 0
     //
     this.init()
@@ -19,6 +18,9 @@ export default class Slider {
   init() {
     this.allLinks[0].classList.add('figure__link_current')
     this.estimatedTime = this.phrase.dataset.estime
+    this.value = parseFloat(
+      window.getComputedStyle(this.element, null).getPropertyValue('width')
+    )
     //preparing slider var
     this.imgArray = Array.from(this.allImagesElt)
     this.imgLen = this.imgArray.length - 1
@@ -26,6 +28,12 @@ export default class Slider {
     this.update()
   }
   update() {
+    window.addEventListener('resize', e => {
+      this.value = parseFloat(
+        window.getComputedStyle(this.element, null).getPropertyValue('width')
+      )
+    })
+
     this.buttons.forEach(button => {
       button.addEventListener('click', e => {
         if (button.classList.contains('fig-slider__nav-button_prev')) {
@@ -57,9 +65,9 @@ export default class Slider {
   }
 
   slideImg() {
-    this.value = -430 * this.times
+    let slide = this.value * -this.times
     this.imgArray.forEach(image => {
-      image.style.transform = `translate(${this.value}px)`
+      image.style.transform = `translate(${slide}px)`
     })
   }
 

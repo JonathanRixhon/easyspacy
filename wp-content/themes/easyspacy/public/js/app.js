@@ -154,6 +154,8 @@ var map = {
 	"./comment-form.js": "./wp-content/themes/easyspacy/resources/js/parts/comment-form.js",
 	"./comments.js": "./wp-content/themes/easyspacy/resources/js/parts/comments.js",
 	"./copy-link.js": "./wp-content/themes/easyspacy/resources/js/parts/copy-link.js",
+	"./header-nav.js": "./wp-content/themes/easyspacy/resources/js/parts/header-nav.js",
+	"./manage-input.js": "./wp-content/themes/easyspacy/resources/js/parts/manage-input.js",
 	"./search-form.js": "./wp-content/themes/easyspacy/resources/js/parts/search-form.js",
 	"./slider.js": "./wp-content/themes/easyspacy/resources/js/parts/slider.js",
 	"./sort-by.js": "./wp-content/themes/easyspacy/resources/js/parts/sort-by.js"
@@ -204,10 +206,12 @@ var CommentForm = /*#__PURE__*/function () {
     this.element = element;
     this.authorInput = element.querySelector('.author');
     this.allInput = this.element.querySelectorAll('input');
-    this.txtAreaElt = this.element.querySelector('.comment-form__message-input');
     this.eltFirstname = undefined;
     this.eltName = undefined;
-    this.init();
+
+    if (!this.element.classList.contains('comment-form_admin')) {
+      this.init();
+    }
   }
 
   _createClass(CommentForm, [{
@@ -215,29 +219,9 @@ var CommentForm = /*#__PURE__*/function () {
     value: function init() {
       var _this = this;
 
-      this.allInput = Array.from(this.allInput);
-      this.allInput.push(this.txtAreaElt); //Gestion du input hidden
-
       this.element.addEventListener('input', function (e) {
         _this.adjustValue(e);
-      }); //Gestion des index si il y a quelque chose
-
-      this.allInput.forEach(function (input) {
-        input.addEventListener('input', function (e) {
-          _this.manageIndex(e.target);
-        });
       });
-    }
-  }, {
-    key: "manageIndex",
-    value: function manageIndex(input) {
-      if (input.value) {
-        input.style.zIndex = '1';
-      }
-
-      if (!input.value) {
-        input.style = '';
-      }
     }
   }, {
     key: "adjustValue",
@@ -387,6 +371,182 @@ var CopyLink = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/header-nav.js":
+/*!**********************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/header-nav.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CommentForm; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CommentForm = /*#__PURE__*/function () {
+  function CommentForm(element) {
+    _classCallCheck(this, CommentForm);
+
+    this.element = element;
+    this.buttonElt = document.createElement('button');
+    this.container = document.querySelector('.navigation');
+    this.searchFormInput = document.querySelector('.search-form__search-input');
+    this.isOpen = false;
+    this.init();
+    this.update();
+    this.openMenu();
+  }
+
+  _createClass(CommentForm, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.buttonElt.className = 'top__menu-button';
+      this.buttonElt.textContent = 'Menu'; //
+
+      this.width = parseFloat(window.getComputedStyle(this.element, null).getPropertyValue('width')); //ecoute au resize
+
+      window.addEventListener('resize', function (e) {
+        _this.width = parseFloat(window.getComputedStyle(_this.element, null).getPropertyValue('width'));
+
+        _this.update();
+
+        _this.openMenu();
+      });
+      this.buttonElt.addEventListener('click', function (e) {
+        _this.isOpen = _this.isOpen ? false : true;
+
+        _this.openMenu();
+      });
+    }
+  }, {
+    key: "update",
+    value: function update() {
+      this.checkWidth();
+    }
+  }, {
+    key: "checkWidth",
+    value: function checkWidth() {
+      if (this.width <= 1000) {
+        if (!this.element.classList.contains('top_small')) {
+          this.element.classList.add('top_small');
+          this.element.insertAdjacentElement('beforeend', this.buttonElt);
+          this.searchFormInput.setAttribute('placeholder', 'Rechercher');
+        }
+      } else {
+        if (this.element.contains(this.buttonElt)) {
+          this.element.removeChild(this.buttonElt);
+        }
+
+        this.element.classList.remove('top_small');
+        this.searchFormInput.setAttribute('placeholder', '');
+
+        if (!this.element.classList.contains('top_small')) {
+          this.container.style = '';
+          document.documentElement.style = '';
+        }
+      }
+    }
+  }, {
+    key: "openMenu",
+    value: function openMenu() {
+      if (this.element.classList.contains('top_small')) {
+        this.container.style.width = this.isOpen ? '80vw' : '0px';
+        this.container.style.opacity = this.isOpen ? '1' : '0';
+        document.documentElement.style.overflowY = this.isOpen ? 'hidden' : '';
+        document.documentElement.style.position = this.isOpen ? 'fixed' : '';
+        document.documentElement.style.width = this.isOpen ? '100vw' : '';
+        this.buttonElt.textContent = this.isOpen ? 'Fermer' : 'Menu';
+      }
+    }
+  }], [{
+    key: "selector",
+    get: function get() {
+      return '.top';
+    }
+  }]);
+
+  return CommentForm;
+}();
+
+
+
+/***/ }),
+
+/***/ "./wp-content/themes/easyspacy/resources/js/parts/manage-input.js":
+/*!************************************************************************!*\
+  !*** ./wp-content/themes/easyspacy/resources/js/parts/manage-input.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CommentForm; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CommentForm = /*#__PURE__*/function () {
+  function CommentForm(element) {
+    _classCallCheck(this, CommentForm);
+
+    this.element = element;
+    this.allInput = this.element.querySelectorAll('input');
+    this.txtAreaElt = this.element.querySelector('textarea');
+    this.allInput = Array.from(this.allInput);
+    this.init();
+  }
+
+  _createClass(CommentForm, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      this.allInput.push(this.txtAreaElt); //Gestion des index si il y a quelque chose
+
+      this.allInput.forEach(function (input) {
+        _this.manageIndex(input);
+
+        input.addEventListener('input', function (e) {
+          _this.manageIndex(e.target);
+        });
+      });
+    }
+  }, {
+    key: "manageIndex",
+    value: function manageIndex(input) {
+      console.log(input);
+
+      if (input.value) {
+        input.style.zIndex = '1';
+      }
+
+      if (!input.value) {
+        input.style = '';
+      }
+    }
+  }], [{
+    key: "selector",
+    get: function get() {
+      return '.form-js';
+    }
+  }]);
+
+  return CommentForm;
+}();
+
+
+
+/***/ }),
+
 /***/ "./wp-content/themes/easyspacy/resources/js/parts/search-form.js":
 /*!***********************************************************************!*\
   !*** ./wp-content/themes/easyspacy/resources/js/parts/search-form.js ***!
@@ -416,7 +576,13 @@ var SearchForm = /*#__PURE__*/function () {
       return _this.bodyclick(e);
     });
     this.searchForm.addEventListener('click', function (e) {
-      return _this.open(e);
+      return _this.open();
+    });
+    this.searchInput.addEventListener('focusin', function (e) {
+      return _this.open();
+    });
+    this.searchInput.addEventListener('focusout', function (e) {
+      return _this.close();
     });
   }
 
@@ -427,15 +593,20 @@ var SearchForm = /*#__PURE__*/function () {
         return;
       }
 
-      if (this.searchInput.classList.contains('focused')) {
-        this.searchInput.classList.remove('focused');
-      }
+      this.close();
     }
   }, {
     key: "open",
     value: function open() {
-      if (!this.searchInput.classList.contains('focused')) {
-        this.searchInput.classList.add('focused');
+      if (!this.searchForm.classList.contains('focused')) {
+        this.searchForm.classList.add('focused');
+      }
+    }
+  }, {
+    key: "close",
+    value: function close() {
+      if (this.searchForm.classList.contains('focused')) {
+        this.searchForm.classList.remove('focused');
       }
     }
   }], [{
@@ -480,7 +651,6 @@ var Slider = /*#__PURE__*/function () {
     this.progress = document.querySelector('.progression__bar');
     this.allLinks = document.querySelectorAll('.figure__link'); //
 
-    this.value = -430;
     this.times = 0; //
 
     this.init();
@@ -490,7 +660,8 @@ var Slider = /*#__PURE__*/function () {
     key: "init",
     value: function init() {
       this.allLinks[0].classList.add('figure__link_current');
-      this.estimatedTime = this.phrase.dataset.estime; //preparing slider var
+      this.estimatedTime = this.phrase.dataset.estime;
+      this.value = parseFloat(window.getComputedStyle(this.element, null).getPropertyValue('width')); //preparing slider var
 
       this.imgArray = Array.from(this.allImagesElt);
       this.imgLen = this.imgArray.length - 1;
@@ -502,6 +673,9 @@ var Slider = /*#__PURE__*/function () {
     value: function update() {
       var _this = this;
 
+      window.addEventListener('resize', function (e) {
+        _this.value = parseFloat(window.getComputedStyle(_this.element, null).getPropertyValue('width'));
+      });
       this.buttons.forEach(function (button) {
         button.addEventListener('click', function (e) {
           if (button.classList.contains('fig-slider__nav-button_prev')) {
@@ -539,11 +713,9 @@ var Slider = /*#__PURE__*/function () {
   }, {
     key: "slideImg",
     value: function slideImg() {
-      var _this2 = this;
-
-      this.value = -430 * this.times;
+      var slide = this.value * -this.times;
       this.imgArray.forEach(function (image) {
-        image.style.transform = "translate(".concat(_this2.value, "px)");
+        image.style.transform = "translate(".concat(slide, "px)");
       });
     }
   }, {
@@ -627,65 +799,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var SortBy = /*#__PURE__*/function () {
-  function SortBy(element) {
-    var _this = this;
-
+  function SortBy() {
     _classCallCheck(this, SortBy);
-
-    this.xhr = this.httpRequestInit();
-    window.addEventListener('click', function (e) {
-      _this.redirect();
-    });
   }
 
-  _createClass(SortBy, [{
-    key: "httpRequestInit",
-    value: function httpRequestInit() {
-      var httpRequest = false;
-
-      if (window.XMLHttpRequest) {
-        // Mozilla, Safari,...
-        httpRequest = new XMLHttpRequest();
-
-        if (httpRequest.overrideMimeType) {
-          httpRequest.overrideMimeType('text/xml');
-        }
-      } else if (window.ActiveXObject) {
-        // IE
-        try {
-          httpRequest = new ActiveXObject('Msxml2.XMLHTTP');
-        } catch (e) {
-          try {
-            httpRequest = new ActiveXObject('Microsoft.XMLHTTP');
-          } catch (e) {}
-        }
-      }
-
-      if (!httpRequest) {
-        alert('Abandon :( Impossible de créer une instance XMLHTTP');
-        return false;
-      }
-
-      return httpRequest;
-    }
-  }, {
-    key: "redirect",
-    value: function redirect() {
-      var _this2 = this;
-
-      this.xhr.onreadystatechange = function () {
-        if (_this2.xhr.readyState === 4) {
-          console.log(_this2.xhr.responseText);
-        }
-      };
-
-      this.xhr.open('GET', '', true); // On envoit un header pour indiquer au serveur que la page est appellée en Ajax
-
-      this.xhr.setRequestHeader('X-Requested-With', 'xmlhttprequest'); // On lance la requête
-
-      this.xhr.send();
-    }
-  }], [{
+  _createClass(SortBy, null, [{
     key: "selector",
     get: function get() {
       return '.sort-capsule';

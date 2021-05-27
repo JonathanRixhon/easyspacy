@@ -40,6 +40,12 @@
     margin-bottom: 2em;
     padding: 0.88888889em;
     @include dialog-bubble;
+    &:nth-child(even) {
+      @include triangle-left;
+    }
+    &:nth-child(odd) {
+      @include triangle-right;
+    }
     a,
     strong {
       font-weight: 700;
@@ -67,7 +73,6 @@
     text-align: center;
     margin: 1em auto 0.3em auto;
   }
-  @include capsule;
 }
 .about-capsule {
   max-width: 1140px;
@@ -75,16 +80,18 @@
   &__title {
     @include font-exo;
     font-size: $size-title-second;
-    margin: 0 auto 0.28571429em;
   }
 }
 .sort-capsule {
   display: block;
   color: $white;
-  background-color: $dark-blue;
   padding: 1em 0.5em;
   border-radius: 0.55555556em;
   margin-bottom: 1.66666667em;
+  position: relative;
+  background: no-repeat url($select-svg-url) $dark-blue;
+  background-size: $select-svg-size;
+  background-position: 90% 1.6em;
 }
 
 .capsule-list {

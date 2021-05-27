@@ -99,6 +99,11 @@ function es_custom_post_type()
         'supports' => ['title', 'editor', 'page-attributes'],
     ]);
 }
+/* *****
+ * remove media button
+ * *****/
+remove_action('media_buttons', 'media_buttons');
+
 
 /* *****
  * Return difficulty moon string
@@ -280,6 +285,13 @@ function mo_comment_fields_custom_order($fields)
 
 function es_form_array()
 {
+    $connected = '';
+    if (current_user_can('administrator')) {
+        $connected = '<h4 class="comment-form__title">Rédigez votre commentaire</h4>';
+        $adminClass =  " comment-form comment-form_admin form-js";
+    } else {
+        $adminClass =  "comment-form form-js";
+    }
     return [
         'logged_in_as'       => null,
         'title_reply'        => null,
@@ -290,8 +302,12 @@ function es_form_array()
         'comment_form_top' => '',
         'comment_notes_before' => '',
         'comment_notes_after' => '',
+        'class_form' => $adminClass,
         // redefine your own textarea (the comment body)
-        'comment_field' => '<label for="comment" class="comment-form__message-label">Message</label>' . '<textarea id="comment" class="comment-form__message-input" name="comment" aria-required="true" required></textarea>',
+        'comment_field' =>  $connected .
+            '<label for="comment" class="comment-form__message-label">Message</label>' .
+            '<textarea id="comment" class="comment-form__message-input" name="comment" aria-required="true" required></textarea>' .
+            '<input type="hidden" name="my_redirect_to" value="' . get_permalink() . '/#comments' . '">',
         'fields' => apply_filters(
             'comment_form_default_fields',
             [
@@ -302,8 +318,7 @@ function es_form_array()
                 <input type="text" name="authorFirstname" id="firstname" class="comment-form__firstname-input" required>
                 <label for="name" class="comment-form__name-label">Nom</label>
                 <input type="text" name="name" class="comment-form__name-input" id="name" required>
-                <input type="hidden" name="author" class="author" value="">
-                <input type="hidden" name="my_redirect_to" value="' . get_permalink() . '/#comments' . '">',
+                <input type="hidden" name="author" class="author" value="">',
                 'email' => null,
                 'url' => null,
             ]
@@ -362,6 +377,28 @@ function es_image_sizes()
     //capsule content
     add_image_size('capsule-content-large', 430, 430, true);
     add_image_size('capsule-content-large-double', 860, 860, true);
+    //News preview
+    add_image_size('news-preview', 430, 240, true);
+    add_image_size('news-preview-double', 860, 480, true);
+}
+/* *****
+* Layout modifier
+* *****/
+function es_news_layout($imgCount)
+{
+    switch ($imgCount) {
+        case 1:
+            return "sg-images-container_single";
+            break;
+
+        case 2:
+            return "sg-images-container_dual";
+            break;
+
+        case 3:
+            return "sg-images-container_trial";
+            break;
+    }
 }
 /* *****
 * Enable thumbnails support
@@ -370,4 +407,5 @@ add_action("after_setup_theme", "es_add_theme_supports");
 function es_add_theme_supports()
 {
     add_theme_support('post-thumbnails', ['post', 'capsule']);
+    add_theme_support('post-thumbnails', ['post', 'new']);
 }

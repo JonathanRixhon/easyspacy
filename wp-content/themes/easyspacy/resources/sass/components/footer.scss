@@ -3,7 +3,6 @@
   background-color: $white;
   display: flex;
   justify-content: space-around;
-  align-items: top;
   padding: 1.33333333em 0 1.33333333em 0;
   &__logo {
     display: block;
@@ -21,6 +20,27 @@
     @include link-bottom();
     &__list {
       margin-bottom: 0.25em;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .bottom {
+    flex-direction: column;
+    text-align: center;
+    &__link {
+      margin: 0 auto;
+      margin-bottom: 1em;
+    }
+    .secondary-navigation {
+      margin-bottom: 1.5em;
+      &__list {
+        display: block;
+      }
+      &__item {
+        margin: 0;
+        display: block;
+      }
     }
   }
 }

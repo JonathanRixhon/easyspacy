@@ -1,0 +1,155 @@
+.main-contact {
+  background-color: $white;
+  display: grid;
+  grid-row-gap: 1.11111111em;
+  grid-template-columns: repeat(2, 1fr);
+  min-height: calc(100vh - 74px);
+  @include font-opensans;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  &__title {
+    max-width: 562px;
+    width: 78.055556%;
+    margin: 0 auto;
+    @include font-exo;
+    grid-column: 2/-1;
+    font-size: 1.44444444em;
+    align-self: end;
+  }
+}
+.dialog-part {
+  border-radius: 0 11.11111111em 0 0;
+  grid-row: 1/3;
+  background-color: $light-blue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__text {
+    margin: 0 auto;
+    width: 70%;
+    max-width: 390px;
+    text-align: center;
+    margin-bottom: 2em;
+    padding: 1.5em;
+    @include dialog-bubble;
+    &:nth-child(even) {
+      @include triangle-left;
+    }
+    &:nth-child(odd) {
+      @include triangle-right;
+    }
+  }
+}
+.contact-form {
+  max-width: 562px;
+  width: 78.055556%;
+  margin: 0 auto;
+  display: grid;
+  grid-auto-rows: min-content;
+  grid-column-gap: 1.11111111em;
+  grid-template-areas:
+    'name firstname'
+    'select select'
+    'email email'
+    'message message';
+  input,
+  label,
+  select,
+  textarea {
+    @include label;
+    padding: 0.55555556em;
+    text-align: left;
+    cursor: pointer;
+    margin-bottom: 1.11111111em;
+
+    & + .contact-form__error-msg {
+      margin-bottom: 0.2em;
+    }
+  }
+  label {
+    z-index: 1;
+  }
+  input:focus {
+    z-index: 2;
+  }
+  textarea:focus {
+    z-index: 2;
+  }
+  &__name-label {
+    grid-area: name;
+  }
+  &__name-input {
+    grid-area: name;
+  }
+  &__firstname-label {
+    grid-area: firstname;
+  }
+  &__firstname-input {
+    grid-area: firstname;
+  }
+  &__obj-label {
+    @include screen-reader;
+  }
+  &__obj-select {
+    grid-area: select;
+    :focus {
+      z-index: 2;
+    }
+  }
+  &__email-label {
+    grid-area: email;
+  }
+  &__email-input {
+    grid-area: email;
+  }
+  &__message-label {
+    grid-area: message;
+  }
+  &__message-input {
+    grid-area: message;
+    min-height: 115px;
+  }
+  &__send {
+    @include big-button;
+    margin: 0;
+    padding: 0.44444444em;
+    grid-column: 2;
+    cursor: pointer;
+  }
+}
+.contact-form_error {
+  grid-template-areas:
+    'errorname errorfirstname'
+    'name firstname'
+    'errorobj errorobj'
+    'select select'
+    'errormail errormail'
+    'email email'
+    'errormsg errormsg'
+    'message message';
+}
+.contact-form {
+  &__error-msg {
+    margin-bottom: 1.11111111em;
+    font-size: 0.77777778em;
+    text-indent: 0.75em;
+    color: $red;
+  }
+  &__error-msg_name {
+    grid-area: errorname;
+  }
+  &__error-msg_firstname {
+    grid-area: errorfirstname;
+  }
+  &__error-msg_obj {
+    grid-area: errorobj;
+  }
+  &__error-msg_email {
+    grid-area: errormail;
+  }
+  &__error-msg_message {
+    grid-area: errormsg;
+  }
+}
+@import './contact-media.scss';

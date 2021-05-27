@@ -24,7 +24,9 @@
             <progress class="progression__bar" max="100" value="0">
                 50%
             </progress>
-            <div class="progression__rocket"></div>
+            <svg class="progression__rocket">
+                <use xlink:href="#rocket"></use>
+            </svg>
         </div>
         <p class="progression__phrase" data-estime="<?= get_field('estimated_time') ?>"></p>
     </section>
@@ -32,8 +34,13 @@
         <!-- TODO: Flider offset par rapport à la barre de chargement -->
         <h2 class="sro">Contennu de la capsule</h2>
         <figure class="fig-slider">
-            <div class="figure__interation">
-                <button type="button" class="fig-slider__nav-button fig-slider__nav-button_prev">Image Précédente</button>
+            <div class="figure__interaction">
+                <button type="button" class="fig-slider__nav-button fig-slider__nav-button_prev">
+                    Image Précédente
+                    <svg class="icon">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
                 <div class="figure__wrapper">
                     <img class="figure__image" <?= es_the_thumbnail_attributes_density(['capsule-content-large', 'capsule-content-large-double']); ?>>
                     <?php $currentImageArray = es_create_image_array(); ?>
@@ -41,7 +48,12 @@
                         <img class="figure__image" <?= es_the_content_attributes_density($image, ['capsule-content-large', 'capsule-content-large-double']) ?>>
                     <?php endforeach; ?>
                 </div>
-                <button type="button" class="fig-slider__nav-button fig-slider__nav-button_next">Image suivante</button>
+                <button type="button" class="fig-slider__nav-button fig-slider__nav-button_next">
+                    Image suivante
+                    <svg class="icon">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </button>
                 <nav class="figure__advencement">
                     <ul class="figure__list">
                         <?php for ($i = 0; $i < count($currentImageArray) + 1; $i++) : ?>

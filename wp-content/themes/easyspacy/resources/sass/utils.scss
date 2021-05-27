@@ -11,15 +11,83 @@ $orange: #eeb05e;
 $red: #c85b5b;
 //sizes
 
+$sprite-url: 'http://localhost:8888/easyspacy/wp-content/themes/easyspacy/public/img/sprite.svg'; //
+$select-svg-url: 'http://localhost:8888/easyspacy/wp-content/themes/easyspacy/public/img/select_arrow.svg'; //
+$select-svg-size: 10px 7px; //svg select
+$sprite-width: 182px; //svgsprite
+$sprite-height: 112px; //svgsprite
 $size-regular: 1.125em; // 18px
 $size-title-capsule: 1.11111111em; //20px
 $size-title-second: 1.94444444em; //35px
 $size-title-third: 1.44444444em; //26px
 $size-small-text: 0.77777778em; //14px
+$width-fixed: 79.444444%; //1144px
+$width-fixed-px: 1144px; //1144px
 
 $from-size-folded: 56px;
 $all-line-height: 1.5;
 //mixins
+@mixin sprite-fct($width, $height, $positionX, $positionY) {
+  width: $width;
+  height: $height;
+  background: url($sprite-url);
+  background-size: $sprite-width $sprite-height;
+  background-position: $positionX $positionY;
+}
+@mixin label {
+  background-color: $dark-white;
+  border: 1px solid $light-blue;
+  border-radius: 0.55555556em;
+}
+@mixin news {
+  @include shadow-capsule;
+  padding: $size-title-capsule;
+  background-color: $white;
+  border-radius: $size-title-capsule;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto auto auto;
+  align-items: stretch;
+  justify-items: stretch;
+  grid-column-gap: 20px;
+  &__title {
+    font-size: 1.94444444em;
+    font-weight: 700;
+    grid-column: 2/-1;
+  }
+  .preview-informations {
+    grid-column: 2/-1;
+    &__date {
+      font-size: $size-small-text;
+      margin-bottom: 1.42857143em;
+    }
+  }
+  &__thumbnail {
+    order: -1;
+    display: block;
+    grid-row: 1 / -1;
+    border-radius: $size-title-capsule;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__fake-link {
+    grid-column: 2/-1;
+    align-self: end;
+    text-align: right;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  &__link {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
 @mixin dialog-bubble {
   @include shadow-button;
   background-color: $white;
@@ -79,7 +147,6 @@ $all-line-height: 1.5;
     background-color: $white;
     line-height: 1em;
     border-radius: $size-title-capsule;
-    transition: box-shadow 0.25s ease-in-out;
     @include shadow-capsule;
     &:hover {
       box-shadow: none;
@@ -136,7 +203,8 @@ $all-line-height: 1.5;
         &-content {
           grid-column: 1/2;
           grid-row: 2/3;
-          text-align: right;
+          text-align: center;
+          text-indent: 3.5em;
         }
       }
     }
@@ -153,7 +221,6 @@ $all-line-height: 1.5;
     background-color: $white;
     line-height: 1em;
     border-radius: $size-title-capsule;
-    transition: box-shadow 0.25s ease-in-out;
     @include shadow-capsule;
     &:hover {
       box-shadow: none;
@@ -163,7 +230,7 @@ $all-line-height: 1.5;
     }
     &__link {
       position: absolute;
-      z-index: -1;
+      z-index: 1;
       display: block;
       top: 0;
       bottom: 0;
@@ -222,6 +289,10 @@ $all-line-height: 1.5;
 }
 @mixin shadow-capsule {
   box-shadow: 1px 2px 15px rgba($color: black, $alpha: 0.05);
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    box-shadow: none;
+  }
 }
 @mixin shadow-button {
   box-shadow: 2px 2px 15px rgba($color: black, $alpha: 0.1);
@@ -254,9 +325,14 @@ $all-line-height: 1.5;
   line-height: inherit;
 }
 @mixin search-open {
-  color: inherit;
-  max-width: 400px;
-  padding: 0 3em 0;
+  flex: 1;
+  max-width: 350px;
+  .search-form__search-input {
+    color: $dark-blue;
+  }
+  .search-form__submit {
+    z-index: 1;
+  }
 }
 //box-sizing for all
 html {
@@ -291,4 +367,17 @@ textarea {
   background: inherit;
   color: inherit;
   font: inherit;
+}
+html {
+  background-color: $dark-white;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
 }
