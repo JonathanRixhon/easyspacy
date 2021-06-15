@@ -1,0 +1,122 @@
+.search-page {
+  @include font-opensans;
+  min-height: 70vh;
+  margin-bottom: 1.11111111em;
+  &__title {
+    @include font-exo;
+    font-size: 1.94444444em;
+    text-align: center;
+    margin: 1.42857143em 0 0.85714286em;
+    &_search {
+      font-weight: 700;
+    }
+  }
+  &__error {
+    font-size: 1.11111111em;
+    text-align: center;
+  }
+}
+.search-form-page {
+  width: 39.027778%;
+  margin: 0 auto;
+  background-color: $light-blue;
+  border-radius: 0.55555556em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.27777778em;
+  margin-bottom: 3.11111111em;
+  @include shadow-capsule;
+  &__submit {
+    &::before {
+      content: '';
+      display: inline-block;
+      vertical-align: -4px;
+      margin-right: 0.33333333em;
+      @include sprite-fct(21px, 21px, -104px, -40px, transparent);
+    }
+
+    padding: 1em;
+    background-color: $dark-blue;
+    color: $white;
+    font-weight: bold;
+    border-radius: 0.55555556em;
+    padding: 1em;
+  }
+  &__input {
+    flex: 1;
+    border-radius: 0.55555556em;
+    padding: 1em 0;
+  }
+}
+.search-list {
+  display: grid;
+  display: grid;
+  grid-template-columns: repeat(3, 368px);
+  grid-gap: 20px 20px;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+/* MEDIA */
+
+/* ********** MEDIA QUERIES ********** */
+@media (min-width: 400px) /* +400px */ {
+  .search-list {
+    @include capsule;
+  }
+}
+
+@media (max-width: 400px) /* -400px */ {
+  .search-list {
+    @include capsule-small;
+  }
+}
+@media (min-width: 2000px) /* +2000px */ {
+  .search-list {
+    grid-template-columns: repeat(4, 368px);
+  }
+}
+
+@media (max-width: 1160px) /* -1160px */ {
+  .search-list {
+    grid-template-columns: repeat(2, 368px);
+  }
+}
+
+@media (max-width: 825px) /* -825px */ {
+  .search-list {
+    grid-template-columns: repeat(1, 368px);
+  }
+}
+@media (max-width: 1030px) /* -825px */ {
+  .search-form-page {
+    width: 70%;
+  }
+}
+@media (max-width: 1030px) /* -825px */ {
+  .search-form-page {
+    width: 85%;
+  }
+}
+@media (max-width: 450px) /* -825px */ {
+  .search-form-page {
+    display: block;
+    &__input {
+      display: block;
+      width: 100%;
+    }
+    &__submit {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 670px) {
+  .search-page {
+    font-size: 1em;
+  }
+  .capsule {
+    font-size: $size-regular;
+  }
+}

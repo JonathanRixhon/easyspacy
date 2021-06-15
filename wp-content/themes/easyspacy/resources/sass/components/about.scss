@@ -1,0 +1,126 @@
+//clip-path: polygon(100% 0, 0 0, 0 100%);
+.about-page {
+  @include font-opensans;
+  strong {
+    font-weight: 700;
+  }
+}
+.about-dialog {
+  display: flex;
+  flex-direction: column;
+  //justify-content: space-between;
+  background-color: $light-blue;
+  padding-top: 5em;
+  &__bubble {
+    @include dialog-bubble;
+    padding: 1em;
+    width: 50%;
+    max-width: 1140px;
+    margin: 0 auto 3em;
+    &:nth-child(even) {
+      @include triangle-left;
+    }
+    &:nth-child(odd) {
+      @include triangle-right;
+    }
+  }
+  &__conclusion {
+    background-color: $white;
+    font-size: 1.44444444em;
+    padding: 0.76923077em 5%;
+    margin-top: 4.80769231em;
+    text-align: center;
+  }
+}
+
+.about-members {
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  background: no-repeat url($bkg-url);
+  background-position: center center;
+  background-size: cover;
+}
+.about {
+  &-sarah {
+    display: grid;
+    flex: 2;
+    text-align: center;
+    grid-template-areas:
+      'img title'
+      'img content';
+    justify-content: center;
+    align-content: center;
+    align-items: start;
+    justify-items: center;
+    grid-column-gap: 1.11111111em;
+    font-weight: 700;
+    &::before {
+      content: '';
+      grid-area: img;
+      width: 139px;
+      height: 230px;
+      @include sprite-bitmap-fct(158px, 230px, -341px, 0);
+    }
+    &__title {
+      align-self: end;
+      font-size: 1.25em;
+      margin-bottom: 0.76923077em;
+    }
+  }
+  &-leo {
+    order: 2;
+    display: grid;
+    flex: 2;
+    text-align: center;
+    grid-template-areas:
+      'title img'
+      'content img';
+    justify-content: center;
+    align-content: center;
+    align-items: start;
+    justify-items: center;
+    grid-column-gap: 1.11111111em;
+    font-weight: 700;
+    &::before {
+      content: '';
+      grid-area: img;
+      width: 139px;
+      height: 230px;
+      @include sprite-bitmap-fct(139px, 230px, -503px, 0);
+    }
+    &__title {
+      align-self: end;
+      font-size: 1.25em;
+      margin-bottom: 0.76923077em;
+    }
+  }
+}
+
+.about-concept {
+  max-width: 756px;
+  margin: 0 auto;
+  padding: 2em;
+  &__title {
+    font-size: 1.44444444em;
+    margin-bottom: 1.53846154em;
+  }
+  &__link {
+    @include big-button;
+  }
+  &__content {
+    margin-bottom: 2.22222222em;
+  }
+  &__title-second {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.11111111em;
+  }
+  ol {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4em;
+  }
+}
+
+@import './about-media.scss';

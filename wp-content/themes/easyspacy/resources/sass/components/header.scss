@@ -1,0 +1,153 @@
+.top {
+  @include font-opensans;
+  padding: 0.5em 0;
+  background-color: $white;
+  font-size: $size-regular;
+  display: grid;
+  grid-template-columns: 10.277778% minmax(77px, auto) minmax(auto, 1047px) 10.277778%;
+  justify-content: center;
+  grid-gap: $size-title-capsule;
+  &__link {
+    grid-column: 2;
+    display: block;
+    text-indent: -999999px;
+    @include sprite-bitmap-fct(56px, 56px, -283px, 0px);
+  }
+  &__logo {
+    display: block;
+  }
+}
+.navigation {
+  grid-column: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-navigation {
+  flex: 1;
+  &__list {
+    max-width: 562px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__link {
+    @include no-style-link;
+    &_current {
+      font-weight: 700;
+    }
+    &:hover {
+      font-weight: 700;
+    }
+  }
+}
+
+.top_small {
+  display: block;
+  .navigation {
+    transition: all ease-in-out 0.5s;
+    position: fixed;
+    background-color: $white;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .search-form {
+    order: -1;
+    display: flex;
+    border: 2px solid $dark-blue;
+    border-radius: 0.55555556em;
+    padding: 0.2em;
+    overflow: hidden;
+    margin-bottom: 1.11111111em;
+    &__search-input {
+      padding: 0.27777778em;
+      flex: 2;
+    }
+    &__submit {
+      text-indent: -99999px;
+      color: $white;
+      border-radius: 0.55555556em;
+      cursor: pointer;
+      @include sprite-fct(
+        calc(1em * 1.5 + 0.55555556em),
+        100%,
+        -104px,
+        0px,
+        $dark-blue
+      );
+    }
+  }
+  .top {
+    &__menu-button {
+      z-index: 11;
+      position: absolute;
+      top: 0.5em;
+      right: 10.277778%;
+      padding: 0.80555556em 0;
+    }
+    &__link {
+      margin-left: 10.277778%;
+      max-width: 56px;
+    }
+  }
+  .main-navigation {
+    flex: initial;
+    width: 100%;
+    text-align: center;
+    &__list {
+      flex-direction: column;
+    }
+    &__item {
+      margin-bottom: 1em;
+    }
+  }
+}
+
+@mixin search-form-animated {
+  .search-form {
+    margin-left: 1.16666667em;
+    border: 2px solid $dark-blue;
+    position: relative;
+    border-radius: 100vh;
+    background-color: transparent;
+    max-width: 56px;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+    flex: auto;
+    &__search-input {
+      display: block;
+      width: 83%;
+      line-height: 2.88888889em;
+      background-color: transparent;
+      padding-left: 3.25em;
+      text-align: left;
+      outline: none;
+    }
+    &__submit {
+      border-radius: 100vh;
+      @include sprite-fct(52px, 52px, -51px, 0px, transparent);
+      position: absolute;
+      text-indent: -9999px;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+    &:hover {
+      @include search-open;
+    }
+    &.focused {
+      @include search-open;
+    }
+  }
+}
+
+@media (min-width: 1001px) {
+  @include search-form-animated;
+}

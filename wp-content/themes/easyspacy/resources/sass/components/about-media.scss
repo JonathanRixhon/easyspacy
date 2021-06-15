@@ -1,0 +1,40 @@
+@media (max-width: 400px) {
+  .about-dialog {
+    .about-dialog__bubble {
+      width: 90%;
+      &::before {
+        display: none;
+      }
+      &::after {
+        display: none;
+      }
+    }
+    &__conclusion {
+      margin-top: 1em;
+    }
+  }
+}
+@media (max-width: 580px) {
+  .about-concept {
+    ol {
+      flex-direction: column;
+      margin-bottom: 2em;
+      li {
+        margin-bottom: 1em;
+        text-align: center;
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  .about-members {
+    background-image: none;
+    flex-direction: column;
+  }
+  .about-sarah {
+    background-color: $orange;
+  }
+  .about-leo {
+    background-color: $light-blue;
+  }
+}

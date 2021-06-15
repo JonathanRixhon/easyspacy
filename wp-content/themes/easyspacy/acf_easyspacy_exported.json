@@ -1,0 +1,104 @@
+[
+    {
+        "key": "group_6097ee2be8cbe",
+        "title": "Données concernant la capsule",
+        "fields": [
+            {
+                "key": "field_6097f3c70be49",
+                "label": "Informations générales",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_6097ee4802b01",
+                "label": "Difficulté",
+                "name": "difficulty",
+                "type": "number",
+                "instructions": "Ce champs doit contenir un chiffre entre 1 et 3, ce chiffre représente la difficulté de la capsule.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": 1,
+                "placeholder": "Entrez un chiffre entre 1 et 3 (inclus)",
+                "prepend": "",
+                "append": "",
+                "min": 1,
+                "max": 3,
+                "step": 1
+            },
+            {
+                "key": "field_6097f44f4ba48",
+                "label": "Images",
+                "name": "",
+                "type": "tab",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "placement": "top",
+                "endpoint": 0
+            },
+            {
+                "key": "field_6097f45b4ba49",
+                "label": "Images",
+                "name": "images",
+                "type": "image",
+                "instructions": "Importez les images des capsules ici.",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "array",
+                "preview_size": "medium",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            }
+        ],
+        "location": [
+            [
+                {
+                    "param": "post_type",
+                    "operator": "==",
+                    "value": "capsule"
+                }
+            ]
+        ],
+        "menu_order": 0,
+        "position": "acf_after_title",
+        "style": "seamless",
+        "label_placement": "top",
+        "instruction_placement": "label",
+        "hide_on_screen": [
+            "the_content"
+        ],
+        "active": true,
+        "description": ""
+    }
+]

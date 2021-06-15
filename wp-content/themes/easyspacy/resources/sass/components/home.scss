@@ -1,0 +1,102 @@
+.main-home {
+  @include font-opensans;
+  background-color: $dark-white;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.presentation {
+  background-color: $light-blue;
+  padding: 2em 0;
+  margin-bottom: 2.77777778em;
+  &__title {
+    @include font-exo;
+    grid-column: 1 / 3;
+    font-size: 3em;
+    position: relative;
+    word-wrap: no-wrap;
+    text-indent: -99999px;
+    overflow: hidden;
+    align-self: center;
+    margin-bottom: 0.62962963em;
+    &__name {
+      font-weight: bold;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      text-indent: 0;
+      text-align: center;
+    }
+  }
+}
+.about-us {
+  @include text-support();
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
+  max-width: 750px;
+  width: 70%;
+  margin: 0 auto;
+  &__dialog {
+    margin-bottom: 2em;
+    padding: 0.88888889em;
+    @include dialog-bubble;
+    &:nth-child(even) {
+      @include triangle-left;
+    }
+    &:nth-child(odd) {
+      @include triangle-right;
+    }
+  }
+  .about-us__link {
+    @include big-button;
+    @include shadow-button;
+    @include outline;
+
+    color: $white;
+    width: 70%;
+    text-decoration: none;
+  }
+}
+.last-one {
+  grid-column: 3/4;
+  grid-row: 1/ 3;
+  align-self: center;
+  &__title {
+    @include font-exo;
+    font-size: $size-title-second;
+    text-align: center;
+    margin: 1em auto 0.3em auto;
+  }
+}
+.about-capsule {
+  max-width: 1144px;
+  margin: 0 auto;
+  &__title {
+    @include font-exo;
+    font-size: $size-title-second;
+    margin-bottom: 0.28571429em;
+  }
+}
+.sort-capsule {
+  &__select {
+    display: block;
+    background: no-repeat url($select-svg-url) $dark-blue;
+    background-size: $select-svg-size;
+    background-position: 95% 1.6em;
+    color: $white;
+    padding: 1em 2em;
+    border-radius: 0.55555556em;
+  }
+  margin-bottom: 1.66666667em;
+}
+
+.capsule-list {
+  display: grid;
+  grid-template-columns: repeat(3, 368px);
+  grid-gap: 20px 20px;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+@import 'home-media.scss';
