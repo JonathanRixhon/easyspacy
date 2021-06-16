@@ -116,6 +116,7 @@
     padding: 0.44444444em;
     grid-column: 2;
     cursor: pointer;
+    grid-area: send;
   }
 }
 .contact-form_error {
@@ -127,7 +128,8 @@
     'errormail errormail'
     'email email'
     'errormsg errormsg'
-    'message message';
+    'message message'
+    'send send';
 }
 .contact-form {
   &__error-msg {
